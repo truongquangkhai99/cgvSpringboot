@@ -14,5 +14,9 @@ public interface UserDao {
 	 public  String md5(String password);
 
 	 public boolean checkAccountExit(String email);
+	 
+	 public User getInformation(String email);
+	 
+	 public void logout();
 
 }

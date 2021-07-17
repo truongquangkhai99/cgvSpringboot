@@ -7,6 +7,7 @@
      <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <title>Đăng nhập</title>
      <link rel="stylesheet" href="<c:url value="/user/css/phim.css"/>" />
   <link rel="stylesheet" href="<c:url value="/user/css/lightslider.css"/>" />
@@ -35,15 +36,16 @@
                 </div>
                 <div class="signin-form">
                     <h2 class="form-title" style="color: #D42304;">Sign In</h2>
-                    <form method="POST" class="register-form" id="login-form">
+                    <form method="POST" action="<%=request.getContextPath()%>/user/login" class="register-form" id="login-form">
                         <div class="form-group">
                             <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" name="your_name" id="your_name" placeholder="Your Name"/>
+                            <input type="text" name="email" id="your_name" placeholder="Email"/>
                         </div>
                         <div class="form-group">
                             <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                            <input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
+                            <input type="password" name="pass" id="your_pass" placeholder="Password"/>
                         </div>
+                        <p style="color: red">${mess != null ? mess :null}</p>
                         <div class="form-group form-button">
                             <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
                         </div>

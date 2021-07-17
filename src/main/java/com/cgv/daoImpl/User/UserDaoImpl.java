@@ -1,6 +1,7 @@
 package com.cgv.daoImpl.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +9,7 @@ import java.math.BigInteger;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 import com.cgv.dao.User.UserDao;
 import com.cgv.models.User;
@@ -17,14 +19,20 @@ public class UserDaoImpl implements UserDao {
 	
 	public static final String REGISTER = "INSERT INTO `user`( `email`, `is_active`, `password`, `phone`, `role_id`, `username`) VALUES (?,?,?,?,?,?)";
 	public static final String CHECKEXIT = "SELECT count(*) FROM user where email = ? ";
+	public static final String CHECKLOGIN = "SELECT count(*) FROM user where email = ? and password = ?";
+	public static final String GETINFO = "SELECT * FROM user where email = ?";
 	
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
 
 	@Override
 	public boolean login(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		String passwordMd5 = md5(user.getPassword());
+		int result = _jdbcTemplate.queryForObject(CHECKLOGIN, new Object[] {user.getEmail(),passwordMd5},Integer.class);
+        if (result == 1){
+            return true;
+        }
+        return false;
 	}
 
 	@Override
@@ -60,11 +68,24 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public boolean checkAccountExit(String email) {
-		 int result = _jdbcTemplate.queryForObject(CHECKEXIT, new Object[] {email},Integer.class);
+		@SuppressWarnings("deprecation")
+		int result = _jdbcTemplate.queryForObject(CHECKEXIT, new Object[] {email},Integer.class);
 	        if (result == 1){
 	            return true;
 	        }
 	        return false;
+	}
+
+	@Override
+	public User getInformation(String email) {
+		// TODO Auto-generated method stub
+		return _jdbcTemplate.queryForObject(GETINFO, new BeanPropertyRowMapper<>(User.class) , new Object[] {email});
+	}
+
+	@Override
+	public void logout() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.cgv.controllers.User;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,8 +34,7 @@ public class AuthenticationController {
 		String name = request.getParameter("name");
 		String password = request.getParameter("pass");
 		String phone = request.getParameter("phone");
-		String rePassword = request.getParameter("re_pass");
-		
+		String rePassword = request.getParameter("re_pass");	
 		User user = new User();
 		user.setEmail(email);
 		user.setActive(0);
@@ -63,5 +63,35 @@ public class AuthenticationController {
 		return mv;
 		
 	}
+	@PostMapping("/login")
+	public ModelAndView userLogin(HttpServletRequest request) {
+		String email = request.getParameter("email");
+		String password = request.getParameter("pass");
+		User user = new User();
+		user.setEmail(email);
+		user.setPassword(password);
+		boolean result = userService.login(user);
+		if(result) {
+			User userInfo = userService.getInformation(email);
+			HttpSession session = request.getSession();
+			session.setAttribute("user", userInfo);
+			ModelAndView mv = new ModelAndView("redirect:home");
+			return mv;
+		}
+		
+		ModelAndView mv = new ModelAndView("dangnhap");
+		mv.addObject("mess","Email or password incorret");	
+		return mv;
+		
+	}
+	
+	@GetMapping("/logout")
+	public ModelAndView logout(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);	
+		session.invalidate();
+		ModelAndView mv = new ModelAndView("redirect:home");
+		return mv;
+	}
+	
 
 }

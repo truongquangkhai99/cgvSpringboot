@@ -64,7 +64,7 @@
                 </div>
                 <div class="signup-image">
                     <figure><img src="images/signup.jpg" alt="sing up image"></figure>
-                    <a href="dangnhap.html" class="signup-image-link" style="color: #D42304;">I am already member</a>
+                    <a href="<%= request.getContextPath() %>/user/login" class="signup-image-link" style="color: #D42304;">I am already member</a>
                 </div>
             </div>
         </div>

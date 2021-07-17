@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean login(User user) {
 		// TODO Auto-generated method stub
-		return false;
+		return userDao.login(user);
 	}
 
 	@Override
@@ -35,6 +35,18 @@ public class UserServiceImpl implements UserService{
 	public boolean checkAccountExit(String username) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public User getInformation(String email) {
+		// TODO Auto-generated method stub
+		return userDao.getInformation(email);
+	}
+
+	@Override
+	public void logout() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
