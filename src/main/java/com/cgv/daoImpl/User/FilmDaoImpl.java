@@ -13,8 +13,9 @@ import com.cgv.models.Film;
 
 @Repository
 public class FilmDaoImpl implements FilmDao{
-	public static final String GET_FILM_DANG_CHIEU = "SELECT * FROM `films` WHERE id_cpost = 2 limit 4";
-	public static final String GET_FILM_SAP_CHIEU = "SELECT * FROM `films` WHERE id_cpost = 1"	;
+	public static final String GET_FILM_DANG_CHIEU = "SELECT * FROM `films`  limit 4";
+	public static final String GET_FILM_SAP_CHIEU = "SELECT * FROM `films` "	;
+	public static final String SEARCH = "SELECT * FROM `films` WHERE film_name LIKE ?";
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
 
@@ -41,6 +42,13 @@ public class FilmDaoImpl implements FilmDao{
 	public List<Film> getFilmDangChieu() {
 		List<Film> list = new ArrayList<Film>();
 		list = _jdbcTemplate.query(GET_FILM_DANG_CHIEU, new BeanPropertyRowMapper<>(Film.class));
+		return list;
+	}
+
+	@Override
+	public List<Film> searchByName(String name) {
+		List<Film> list = new ArrayList<Film>();
+		list = _jdbcTemplate.query(SEARCH, new BeanPropertyRowMapper<>(Film.class),new Object[] {name});
 		return list;
 	}
 

@@ -16,5 +16,7 @@ public interface FilmDao {
 	public List<Film> getFilmSapChieu();
 	
 	public List<Film> getFilmDangChieu();
+	
+	public List<Film> searchByName(String name);
 
 }

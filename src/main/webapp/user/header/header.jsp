@@ -4,7 +4,7 @@
  <!--navigation-------------->
  <nav>
     <!--logo--------------->
-    <a href="<%= request.getContextPath() %>/home" class="logo">
+    <a href="<%= request.getContextPath() %>/user/home" class="logo">
       <img src="<c:url value="/user/images/logo.png"/>" />
     </a>
     <!--menu--btn----------------->
@@ -12,7 +12,7 @@
     <!--menu-------------->
     <ul class="menu">
       <li><a href="<%= request.getContextPath() %>/user/gioithieu">Giới Thiệu</a></li>
-      <li class="active"><a  href="<%= request.getContextPath() %>/user/phim">Phim</a></li>
+      <li ><a  href="<%= request.getContextPath() %>/user/phim">Phim</a></li>
       <%if(userInfo != null) {%>
       	<li><a href="#"><%=userInfo.getUsername()%></a></li>
       	<li><a href="<%= request.getContextPath() %>/user/logout">Đăng Xuất</a></li>
@@ -23,11 +23,13 @@
    
     </ul>
     <!--search------------->
-    <div class="search">
-      <input type="text" placeholder="Find Your Favourtie Movies" />
+  
+    <form class="search" action="<%=request.getContextPath()%>/user/search" method="post">
+     <input type="text" name="keySearch" placeholder="Find Your Favourtie Movies" /> 
       <!--search-icon----------->
-      <i class="fas fa-search"></i>
-      
-    </div>
+      <button style="border: none;background-color: #f6f5f0" type="submit" >  <i type="submit" name="signin" class="fas fa-search"></i></button>
+
+    </form>
+
     
   </nav>

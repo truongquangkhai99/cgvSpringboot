@@ -39,4 +39,10 @@ public class FilmServiceimpl implements FilmService{
 		return filmDao.getFilmDangChieu();
 	}
 
+	@Override
+	public List<Film> searchByName(String name) {
+		// TODO Auto-generated method stub
+		return filmDao.searchByName(name);
+	}
+
 }
