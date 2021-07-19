@@ -39,11 +39,11 @@
                     <form method="POST" action="<%=request.getContextPath()%>/user/login" class="register-form" id="login-form">
                         <div class="form-group">
                             <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" name="email" id="your_name" placeholder="Email"/>
+                            <input type="text" name="email" id="your_name" placeholder="Email" required="required"/>
                         </div>
                         <div class="form-group">
                             <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                            <input type="password" name="pass" id="your_pass" placeholder="Password"/>
+                            <input type="password" name="pass" id="your_pass" placeholder="Password" required="required"/>
                         </div>
                         <p style="color: red">${mess != null ? mess :null}</p>
                         <div class="form-group form-button">

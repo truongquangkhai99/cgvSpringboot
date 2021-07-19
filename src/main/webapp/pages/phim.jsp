@@ -45,8 +45,8 @@
     <li class="item-a">
         <!--showcase-box------------------->
         <div class="showcase-box">
-         <img src="<c:url value="/user/images/${item.image}"/>" />
-        </div>
+           <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }"><img  src="<c:url value="/user/images/${item.image}"/>" />
+        </div></a> 
       </li>
 	   
 	</c:forEach>

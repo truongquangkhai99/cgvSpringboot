@@ -52,7 +52,7 @@
          <img src="<c:url value="/user/images/${item.image}"/>" />
       </div>
       <!--text--------->
-      <a href="#">${item.filmName } </a>
+      <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }">${item.filmName } </a>
       <!-- Button trigger modal -->
       <div class="button--movie">
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${item.id}"
