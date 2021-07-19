@@ -24,7 +24,7 @@ public class FilmServiceimpl implements FilmService{
 	@Override
 	public Film getDetailFilm(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return filmDao.getDetailFilm(id);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@page import="java.util.Date" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,105 +59,23 @@
     <!--slider------------------->
     <ul id="autoWidth2" class="cs-hidden">
       <!--slide-box-1------------------>
+      <c:forEach var="item" items="${ listPro}" varStatus="index">
       <li class="item-a">
         <div class="latest-box">
           <!--img-------->
           <div class="latest-b-img">
-            <a href="./Event/event1.html">
-              <img src="./images/event1.PNG" /></a>
+            <a href="<%= request.getContextPath() %>/user/postdetail/${item.id }">
+              <img src="<c:url value="/user/images/${item.image}"/>" /></a>
           </div>
           <!--text---------->
           <div class="latest-b-text">
             <strong><i class="fab fa-hotjar"></i></strong>
-            <p>Ưu đãi Hot</p>
+            <p>Ưu đãi hot</p>
           </div>
         </div>
       </li>
       <!--slide-box-2------------------>
-      <li class="item-b">
-        <div class="latest-box">
-          <!--img-------->
-          <div class="latest-b-img">
-            <a href="./Event/event2.html"><img src="./images/event2.PNG" /></a>
-          </div>
-          <!--text---------->
-          <div class="latest-b-text">
-            <strong><i class="fab fa-hotjar"></i></strong>
-            <p>Ưu đãi Hot</p>
-          </div>
-        </div>
-      </li>
-      <!--slide-box-3------------------>
-      <li class="item-c">
-        <div class="latest-box">
-          <!--img-------->
-          <div class="latest-b-img">
-            <a href="./Event/event3.html">
-              <img src="./images/event3.PNG" /></a>
-          </div>
-          <!--text---------->
-          <div class="latest-b-text">
-            <strong><i class="fab fa-hotjar"></i></strong>
-            <p>Ưu đãi Hot</p>
-          </div>
-        </div>
-      </li>
-      <!--slide-box-4------------------>
-      <li class="item-d">
-        <div class="latest-box">
-          <!--img-------->
-          <div class="latest-b-img">
-            <a href="./Event/event4.html"><img src="./images/event4.PNG" /></a>
-          </div>
-          <!--text---------->
-          <div class="latest-b-text">
-            <strong><i class="fab fa-hotjar"></i></strong>
-            <p>Ưu đãi Hot</p>
-          </div>
-        </div>
-      </li>
-      <!--slide-box-5------------------>
-      <li class="item-e">
-        <div class="latest-box">
-          <!--img-------->
-          <div class="latest-b-img">
-            <a href="./Event/event5.html"><img src="./images/event5.PNG" /></a>
-          </div>
-          <!--text---------->
-          <div class="latest-b-text">
-            <strong><i class="fab fa-hotjar"></i></strong>
-            <p>Ưu đãi Hot</p>
-          </div>
-        </div>
-      </li>
-      <!--slide-box-6------------------>
-      <li class="item-f">
-        <div class="latest-box">
-          <!--img-------->
-          <div class="latest-b-img">
-            <a href="./Event/event6.html"><img src="./images/event6.PNG" /></a>
-          </div>
-          <!--text---------->
-          <div class="latest-b-text">
-            <strong><i class="fab fa-hotjar"></i></strong>
-            <p>Ưu đãi Hot</p>
-          </div>
-        </div>
-      </li>
-      <!--slide-box-7------------------>
-      <li class="item-g">
-        <div class="latest-box">
-          <!--img-------->
-          <div class="latest-b-img">
-            <a href="./Event/event7.html"><img src="./images/event7.PNG" /></a>
-          </div>
-          <!--text---------->
-          <div class="latest-b-text">
-            <strong><i class="fab fa-hotjar"></i></strong>
-            <p>Ưu đãi Hot</p>
-          </div>
-        </div>
-      </li>
+      </c:forEach>
     </ul>
   </section>
 
@@ -175,17 +94,18 @@
          <img src="<c:url value="/user/images/${item.image}"/>" />
       </div>
       <!--text--------->
-      <a href="#">${item.filmName } </a>
+      <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }">${item.filmName } </a>
       <!-- Button trigger modal -->
       <div class="button--movie">
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${item.id}"
           style="margin-right: 20px">
           Trailer
         </button>
-        <button type="button" class="btn btn-danger">Đặt Vé</button>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModa${item.id}" data-bs-whatever="@mdo">Đặt Vé</button>
+        
       </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal Trailer -->
     <div class="modal fade" id="exampleModal${item.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -196,7 +116,61 @@
       </div>
     </div>
     </div>
-	   
+	<!--  Modak Booking -->
+	<div class="modal fade" id="exampleModa${item.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">${item.filmName}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="schedule" class="col-form-label">Lịch chiếu:</label>
+            <select class="form-select" name="schedule" aria-label="Default select example">
+			  <option selected>Chọn lịch chiếu</option>
+			  <option value="1">One</option>
+			  <option value="2">Two</option>
+			  <option value="3">Three</option>
+			</select>
+          </div>
+          <div class="mb-3">
+          <label for="showtime" class="col-form-label">Suất chiếu:</label>
+          <select class="form-select" name="showtime" aria-label="Default select example">
+			  <option selected>Chọn suất chiếu</option>
+			  <option value="1">One</option>
+			  <option value="2">Two</option>
+			  <option value="3">Three</option>
+			</select>
+          </div>
+          <div class="mb-3">
+          <label for="room" class="col-form-label">Phòng chiếu:</label>
+          <select class="form-select" name="room" aria-label="Default select example">
+			  <option selected>Chọn phòng</option>
+			  <option value="1">One</option>
+			  <option value="2">Two</option>
+			  <option value="3">Three</option>
+			</select>
+          </div>
+          <div class="mb-3">
+          <label for="seat" class="col-form-label">Ghế ngồi:</label>
+          <select class="form-select" name="seat" aria-label="Default select example">
+			  <option selected>Chọn ghế</option>
+			  <option value="1">One</option>
+			  <option value="2">Two</option>
+			  <option value="3">Three</option>
+			</select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-danger">Đặt vé</button>
+      </div>
+    </div>
+  </div>
+</div>
 	</c:forEach>
 
   </section>
@@ -211,44 +185,8 @@
       });
     });
   </script>
-  <!--btns--------------->
-  <!-- <div class="btns">
-    <a href="#">Previous</a>
-    <a href="#">Next</a>
-  </div> -->
-  <!--stopplaying--------------->
-  <script>
-    $("#exampleModal1").on("hidden.bs.modal", function (e) {
-      $("#exampleModal1 iframe").attr(
-        "src",
-        $("#exampleModal1 iframe").attr("src")
-      );
-    });
-  </script>
-   <script>
-    $("#exampleModal2").on("hidden.bs.modal", function (e) {
-      $("#exampleModal2 iframe").attr(
-        "src",
-        $("#exampleModal2 iframe").attr("src")
-      );
-    });
-  </script>
-   <script>
-    $("#exampleModal3").on("hidden.bs.modal", function (e) {
-      $("#exampleModal3 iframe").attr(
-        "src",
-        $("#exampleModal3 iframe").attr("src")
-      );
-    });
-  </script>
-   <script>
-    $("#exampleModal4").on("hidden.bs.modal", function (e) {
-      $("#exampleModal4 iframe").attr(
-        "src",
-        $("#exampleModal4 iframe").attr("src")
-      );
-    });
-  </script>
+  
+   
   <!--footer------------------>
   
    <%@ include file="/user/footer/footer.jsp"  %>

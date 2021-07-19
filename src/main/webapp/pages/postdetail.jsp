@@ -18,16 +18,12 @@ and open the template in the editor.
     <body>
        <%@ include file="/user/header/header.jsp"  %>
       
-        <p class="head3">${detailfilm.filmName }</p>
+        <p class="head3">${postdetail.title }</p>
         <div class="event3">
-            <img class="image3" src="<c:url value="/user/images/${detailfilm.image }"/>" alt=""/>
-            <p class="cmt3"><span style="font-weight:bold">Diễn viên : </span>${detailfilm.actor } </p><br>
-            <p class="cmt3"><span style="font-weight:bold">Đạo diễn : </span>${detailfilm.director } </p><br>
-            <p class="cmt3"><span style="font-weight:bold">Thể loại : </span>${cfilm.name } </p><br>
-            <p class="cmt3"><span style="font-weight:bold">Thời lượng : </span>${detailfilm.duration } </p><br>
-            <p class="cmt3"><span style="font-weight:bold">Nội dung : </span>${detailfilm.description } </p><br>
+            <img class="image3" src="<c:url value="/user/images/${postdetail.image }"/>" alt=""/>
+            <p class="cmt3">${postdetail.description } </p>
+            
         </div>
-        
        <%@ include file="/user/footer/footer.jsp"  %>
     </body>
 </html>

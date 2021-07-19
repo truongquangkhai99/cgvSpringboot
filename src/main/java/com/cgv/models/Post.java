@@ -4,8 +4,9 @@ public class Post {
 	private int id;
 	private String title;
 	private String description;
-	private String createTime;
-	private int categoryPost;
+	private String image;
+	private String created_at;
+	private int id_cpost;
 	public int getId() {
 		return id;
 	}
@@ -24,35 +25,42 @@ public class Post {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getCreateTime() {
-		return createTime;
+	public String getImage() {
+		return image;
 	}
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+	public void setImage(String image) {
+		this.image = image;
 	}
-	public int getCategoryPost() {
-		return categoryPost;
+	public String getCreated_at() {
+		return created_at;
 	}
-	public void setCategoryPost(int categoryPost) {
-		this.categoryPost = categoryPost;
+	public void setCreated_at(String created_at) {
+		this.created_at = created_at;
+	}
+	public int getId_cpost() {
+		return id_cpost;
+	}
+	public void setId_cpost(int id_cpost) {
+		this.id_cpost = id_cpost;
 	}
 	public Post() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public Post(int id, String title, String description, String createTime, int categoryPost) {
+	public Post(int id, String title, String description, String image, String created_at, int id_cpost) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.createTime = createTime;
-		this.categoryPost = categoryPost;
+		this.image = image;
+		this.created_at = created_at;
+		this.id_cpost = id_cpost;
 	}
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", title=" + title + ", description=" + description + ", createTime=" + createTime
-				+ ", categoryPost=" + categoryPost + "]";
+		return "Post [id=" + id + ", title=" + title + ", description=" + description + ", image=" + image
+				+ ", created_at=" + created_at + ", id_cpost=" + id_cpost + "]";
 	}
+	
 	
 
 }

@@ -9,7 +9,13 @@ public class Film {
 	private String filmName;
 	private String image;
 	private String trailer;
-	private int categoryFilmId;
+	private int id_cfilm;
+	public int getId_cfilm() {
+		return id_cfilm;
+	}
+	public void setId_cfilm(int id_cfilm) {
+		this.id_cfilm = id_cfilm;
+	}
 	public int getId() {
 		return id;
 	}
@@ -58,14 +64,8 @@ public class Film {
 	public void setTrailer(String trailer) {
 		this.trailer = trailer;
 	}
-	public int getCategoryFilmId() {
-		return categoryFilmId;
-	}
-	public void setCategoryFilmId(int categoryFilmId) {
-		this.categoryFilmId = categoryFilmId;
-	}
 	public Film(int id, String description, String director, String actor, String duration, String filmName,
-			String image, String trailer, int categoryFilmId) {
+			String image, String trailer, int id_cfilm) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -75,7 +75,7 @@ public class Film {
 		this.filmName = filmName;
 		this.image = image;
 		this.trailer = trailer;
-		this.categoryFilmId = categoryFilmId;
+		this.id_cfilm = id_cfilm;
 	}
 	public Film() {
 		super();
@@ -85,7 +85,7 @@ public class Film {
 	public String toString() {
 		return "Film [id=" + id + ", description=" + description + ", director=" + director + ", actor=" + actor
 				+ ", duration=" + duration + ", filmName=" + filmName + ", image=" + image + ", trailer=" + trailer
-				+ ", categoryFilmId=" + categoryFilmId + "]";
+				+ ", categoryFilmId=" + id_cfilm + "]";
 	}
 	
 

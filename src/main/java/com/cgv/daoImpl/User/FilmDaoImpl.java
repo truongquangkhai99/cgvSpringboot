@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.cgv.dao.User.FilmDao;
 import com.cgv.models.Film;
+import com.cgv.models.User;
 
 @Repository
 public class FilmDaoImpl implements FilmDao{
+	public static final String GET_CHITIET_FILM = "SELECT * FROM `films`  WHERE id = ?";
 	public static final String GET_FILM_DANG_CHIEU = "SELECT * FROM `films`  limit 4";
 	public static final String GET_FILM_SAP_CHIEU = "SELECT * FROM `films` "	;
 	public static final String SEARCH = "SELECT * FROM `films` WHERE film_name LIKE ?";
@@ -27,8 +29,7 @@ public class FilmDaoImpl implements FilmDao{
 
 	@Override
 	public Film getDetailFilm(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return _jdbcTemplate.queryForObject(GET_CHITIET_FILM, new BeanPropertyRowMapper<>(Film.class) , new Object[] {id});
 	}
 
 	@Override
