@@ -22,7 +22,6 @@ public class IntroductionController {
 		ModelAndView mv = new ModelAndView("introduce");
 		List<Post> listInfor = postService.getInfor();
 		mv.addObject("listInfor", listInfor);
-		System.out.println(listInfor);
 		return mv;
 		
 	}

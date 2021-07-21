@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="<c:url value="/user/css/lightslider.css"/>" />
   <script src="<c:url value="/user/js/JQuery3.3.1.js"/>" type="text/javascript"></script>
   <script src="<c:url value="/user/js/lightslider.js"/>" type="text/javascript"></script>
+  <script src="<c:url value="/user/js/booking.js"/>" type="text/javascript"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
   <link rel="shortcut icon" href="<c:url value="/user/images/fav icon.png"/>"/>
@@ -54,12 +55,13 @@
       <!--text--------->
       <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }">${item.filmName } </a>
       <!-- Button trigger modal -->
-      <div class="button--movie">
+       <div class="button--movie">
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${item.id}"
           style="margin-right: 20px">
           Trailer
         </button>
-        <button type="button" class="btn btn-danger">Đặt Vé</button>
+        <button onclick="getSchedule(${item.id});" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModa${item.id}" data-bs-whatever="@mdo">Đặt Vé</button>
+        
       </div>
     </div>
     <!-- Modal -->
@@ -73,9 +75,72 @@
       </div>
     </div>
     </div>
-	   
+	  	<div class="modal fade" id="exampleModa${item.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">${item.filmName}</h5>
+        <button type="button" id="btn-close${item.id}" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form >
+          <div class="mb-3">
+         
+            <label for="schedule" class="col-form-label">Lịch chiếu:</label>
+            <select required  class="form-select" onchange="getShowtime(${ item.id})" id="schedule${ item.id}" name="schedule" aria-label="Default select example">
+			  <option value="0">Chọn lịch chiếu</option>
+			  <option value="1">One</option>
+			  <option value="2">Two</option>
+			  <option value="3">Three</option>
+			</select>
+          </div>
+          <div class="mb-3">
+          <label for="showtime" class="col-form-label">Suất chiếu:</label>
+          <select class="form-select" onchange="getRoom(${ item.id})"  id="showtime${ item.id}"  name="showtime" aria-label="Default select example">
+			  <option value="0">Chọn suất chiếu</option>			  		  
+			</select>
+          </div>
+          <div class="mb-3">
+          <label for="room" class="col-form-label">Phòng chiếu:</label>
+          <select onchange="getSeat(${item.id})" class="form-select" id="room${ item.id}" name="room" aria-label="Default select example">
+			  <option  value="0">Chọn phòng</option>
+			</select>
+          </div>
+          <div class="mb-3">
+          <label for="seat" class="col-form-label">Ghế ngồi:</label>
+          <select  multiple="multiple" class="form-select" id="seat${ item.id}" name="seat" aria-label="Default select example">
+			  <option  value="0">Chọn ghế</option>
+			  
+			</select>
+          </div>
+          <p style="color: red" id="resultError${ item.id}"></p>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <button onclick="bookticket(${item.id})" type="button" class="btn btn-danger">Đặt vé</button>
+      </div>
+    </div>
+  </div>
+</div> 
 	</c:forEach>
-
+<div class="modal fade" id="exampleModaltest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="result" class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button  onclick="closeModel()" type="button" class="btn btn-danger" >OK</button>
+ 
+      </div>
+    </div>
+  </div>
+</div>
   </section>
   <script>
     $(document).ready(function () {

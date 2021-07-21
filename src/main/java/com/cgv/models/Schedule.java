@@ -4,7 +4,7 @@ public class Schedule {
 
 	private int id;
 	private int filmId;
-	private String data;
+	private String date;
 	public int getId() {
 		return id;
 	}
@@ -17,17 +17,17 @@ public class Schedule {
 	public void setFilmId(int filmId) {
 		this.filmId = filmId;
 	}
-	public String getData() {
-		return data;
+	public String getDate() {
+		return date;
 	}
-	public void setData(String data) {
-		this.data = data;
+	public void setDate(String date) {
+		this.date = date;
 	}
-	public Schedule(int id, int filmId, String data) {
+	public Schedule(int id, int filmId, String date) {
 		super();
 		this.id = id;
 		this.filmId = filmId;
-		this.data = data;
+		this.date = date;
 	}
 	public Schedule() {
 		super();
@@ -35,7 +35,10 @@ public class Schedule {
 	}
 	@Override
 	public String toString() {
-		return "Schedule [id=" + id + ", filmId=" + filmId + ", data=" + data + "]";
+		return "Schedule [id=" + id + ", filmId=" + filmId + ", date=" + date + "]";
 	}
+	
+	
+
 	
 }

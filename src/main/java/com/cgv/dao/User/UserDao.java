@@ -7,9 +7,9 @@ import com.cgv.models.User;
 @Repository
 public interface UserDao {
 	
-	public boolean login(User user);
-	
-	public boolean register(User user);
+	 public boolean login(User user);
+		
+	 public boolean register(User user);
 	
 	 public  String md5(String password);
 

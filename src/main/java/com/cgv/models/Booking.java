@@ -8,6 +8,8 @@ public class Booking {
 	private int showtimeId;
 	private int roomId;
 	private int seatId;
+	private int amount;
+	private int status;
 	public int getId() {
 		return id;
 	}
@@ -50,7 +52,20 @@ public class Booking {
 	public void setSeatId(int seatId) {
 		this.seatId = seatId;
 	}
-	public Booking(int id, int userId, int filmId, int scheduleId, int showtimeId, int roomId, int seatId) {
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public Booking(int id, int userId, int filmId, int scheduleId, int showtimeId, int roomId, int seatId, int amount,
+			int status) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -59,6 +74,8 @@ public class Booking {
 		this.showtimeId = showtimeId;
 		this.roomId = roomId;
 		this.seatId = seatId;
+		this.amount = amount;
+		this.status = status;
 	}
 	public Booking() {
 		super();
@@ -67,7 +84,8 @@ public class Booking {
 	@Override
 	public String toString() {
 		return "Booking [id=" + id + ", userId=" + userId + ", filmId=" + filmId + ", scheduleId=" + scheduleId
-				+ ", showtimeId=" + showtimeId + ", roomId=" + roomId + ", seatId=" + seatId + "]";
+				+ ", showtimeId=" + showtimeId + ", roomId=" + roomId + ", seatId=" + seatId + ", amount=" + amount
+				+ ", status=" + status + "]";
 	}
 	
 	

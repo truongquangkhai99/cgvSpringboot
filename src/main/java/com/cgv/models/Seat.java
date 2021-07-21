@@ -3,7 +3,6 @@ package com.cgv.models;
 public class Seat {
 	private int id;
 	private String seatName;
-	private int status;
 	public int getId() {
 		return id;
 	}
@@ -16,17 +15,10 @@ public class Seat {
 	public void setSeatName(String seatName) {
 		this.seatName = seatName;
 	}
-	public int isStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
-	public Seat(int id, String seatName, int status) {
+	public Seat(int id, String seatName) {
 		super();
 		this.id = id;
 		this.seatName = seatName;
-		this.status = status;
 	}
 	public Seat() {
 		super();
@@ -34,8 +26,7 @@ public class Seat {
 	}
 	@Override
 	public String toString() {
-		return "Seat [id=" + id + ", seatName=" + seatName + ", status=" + status + "]";
+		return "Seat [id=" + id + ", seatName=" + seatName + "]";
 	}
 	
-
 }
