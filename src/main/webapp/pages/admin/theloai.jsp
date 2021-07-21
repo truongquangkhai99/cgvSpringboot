@@ -72,19 +72,21 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form>
+                                                    <form action="<%= request.getContextPath() %>/admin/update-theloai" method="post">
                                                         <div class="mb-3">
+                                                         <input type="hidden" class="form-control" id="id" name="id" value="${item.id}" >
                                                             <label for="category-film"
                                                                 class="col-form-label">Name:</label>
-                                                            <input type="text" class="form-control" id="category-film" value="${item.name}">
+                                                            <input type="text" class="form-control" id="category-film" name="category-film" value="${item.name}">
                                                         </div>
+                                                        <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    	<button type="submit" class="btn btn-primary">Save changes</button>
                                                     </form>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
+                                                
+                                                    
+                                                
                                             </div>
                                         </div>
                                     </div>
