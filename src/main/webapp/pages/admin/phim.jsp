@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
     <!DOCTYPE html>
 <html lang="en">
 
@@ -55,22 +56,24 @@
                   </tr>
                 </tfoot>
                 <tbody>
+                
+                <c:forEach var="item" items="${listF}" varStatus="index">
                   <tr>
-                    <td>1</td>
+                    <td>${index.index +1}</td>
                     <td>
-                      <a href="" data-bs-toggle="modal" data-bs-target="#exampleModalImg"><img
-                          style="width: 120px !important;height: 150px !important;" src="" class="img-fluid"></a>
+                      <a href="" data-bs-toggle="modal" data-bs-target="#exampleModalImg${item.id }"><img
+                          style="width: 120px !important;height: 150px !important;" src="<c:url value="/user/images/${item.image}"/>" class="img-fluid"></a>
 
                     </td>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td><a href="" data-bs-toggle="modal" data-bs-target="#exampleModalDes">Hay</a></td>
-                    <td> <a href="" data-bs-toggle="modal" data-bs-target="#exampleModalView">System Architect</a></td>
+                    <td>${item.actor }</td>
+                    <td>${item.director }</td>
+                    <td>${item.duration }</td>
+                    <td>${item.id_cfilm }</td>
+                    <td><a href="" data-bs-toggle="modal" data-bs-target="#exampleModalDes${item.id }">${item.description }</a></td>
+                    <td> <a href="" data-bs-toggle="modal" data-bs-target="#exampleModalView${item.id }">Link</a></td>
                     <td>
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
+                        data-bs-target="#exampleModal${item.id }">
                         Update
                       </button>
                       <button type="button" class="btn btn-danger">
@@ -80,23 +83,23 @@
 
                   </tr>
                   <!-- Modal img-->
-                  <div class="modal fade" id="exampleModalImg" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  <div class="modal fade" id="exampleModalImg${item.id }" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-m">
                       <div class="modal-content">
                         <div class="modal-body">
-                          <img style="width: 460px !important;height: 580px !important;" src="" class="img-fluid">
+                          <img style="width: 460px !important;height: 580px !important;" src="<c:url value="/user/images/${item.image}"/>" class="img-fluid">
                         </div>
                       </div>
                     </div>
                   </div>
                   <!-- Modal img-->
-                  <div class="modal fade" id="exampleModalView" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  <div class="modal fade" id="exampleModalView${item.id }" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                       <div class="modal-content">
                         <div class="modal-body">
-                          <iframe width="1104" height="621" src="https://www.youtube.com/embed/54yAKyNkK7w"
+                          <iframe width="1104" height="621" src="${item.trailer }"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen></iframe>
@@ -106,23 +109,95 @@
                   </div>
                   <!-- Modal view-->
                   <!-- Modal Descrip-->
-                  <div class="modal fade" id="exampleModalDes" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  <div class="modal fade" id="exampleModalDes${item.id }" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-l">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Bố già</h5>
+                          <h5 class="modal-title" id="exampleModalLabel">${item.filmName }</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                          <p>${item.description }</p>
                         </div>
 
                       </div>
                     </div>
                   </div>
                   <!-- Modal Descrup-->
-                  <!-- Modal Add-->
+                  
+                  <!-- Modal Update-->
+                  <div class="modal fade" id="exampleModal${item.id }" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Cập nhập</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <div class="row">
+                              <div class="col-6">
+                                <div class="">
+                                  <label for="film-name" class="col-form-label">Tên Phim:</label>
+                                  <input type="text" class="form-control" id="film-name" value="${item.filmName }">
+                                </div>
+                                <div class="">
+                                  <label for="actor" class="col-form-label">Diễn viên:</label>
+                                  <input type="text" class="form-control" id="actor" value="${item.actor }">
+                                </div>
+                                <div class="">
+                                  <label for="director" class="col-form-label">Đạo diễn:</label>
+                                  <input type="text" class="form-control" id="director" value="${item.director }">
+                                </div>
+                                <div class="">
+                                  <label for="duration" class="col-form-label">Thời lượng:</label>
+                                  <input type="text" class="form-control" id="duration" value="${item.duration }">
+                                </div>
+                              </div>
+                              <div class="col-6 ">
+                                <div class="">
+                                  <label for="category-film" class="col-form-label">Thể loại:</label>
+                                  <select class="form-select" aria-label="Default select example" >
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                                <div class="mb-4 mt-4">
+                                  <label for="exampleFormControlFile1">Ảnh Thumbnail</label>
+                                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+                                <div class="">
+                                  <label for="category-film" class="col-form-label">Trailer:</label>
+                                  <input type="text" class="form-control" id="category-film">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="">
+                              <label for="category-film" class="col-form-label">Nội dung:</label>
+                              <textarea name="description" id="editor1" cols="30" rows="30"></textarea>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal Update-->
+					</c:forEach>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- Modal Add-->
                   <div class="modal fade" id="exampleModalAdd" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-lg">
@@ -186,77 +261,6 @@
                     </div>
                   </div>
                   <!-- Modal Add-->
-                  <!-- Modal Update-->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Cập nhập</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          <form>
-                            <div class="row">
-                              <div class="col-6">
-                                <div class="">
-                                  <label for="category-film" class="col-form-label">Tên Phim:</label>
-                                  <input type="text" class="form-control" id="category-film">
-                                </div>
-                                <div class="">
-                                  <label for="category-film" class="col-form-label">Diễn viên:</label>
-                                  <input type="text" class="form-control" id="category-film">
-                                </div>
-                                <div class="">
-                                  <label for="category-film" class="col-form-label">Đạo diễn:</label>
-                                  <input type="text" class="form-control" id="category-film">
-                                </div>
-                                <div class="">
-                                  <label for="category-film" class="col-form-label">Thời lượng:</label>
-                                  <input type="text" class="form-control" id="category-film">
-                                </div>
-                              </div>
-                              <div class="col-6 ">
-                                <div class="">
-                                  <label for="category-film" class="col-form-label">Thể loại:</label>
-                                  <select class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                  </select>
-                                </div>
-                                <div class="mb-4 mt-4">
-                                  <label for="exampleFormControlFile1">Ảnh Thumbnail</label>
-                                  <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-                                <div class="">
-                                  <label for="category-film" class="col-form-label">Trailer:</label>
-                                  <input type="text" class="form-control" id="category-film">
-                                </div>
-                              </div>
-                            </div>
-                            <div class="">
-                              <label for="category-film" class="col-form-label">Nội dung:</label>
-                              <textarea name="description" id="editor1" cols="30" rows="30"></textarea>
-                            </div>
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Modal Update-->
-
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </main>
             <%@ include file="/admin/footer/footer.jsp"  %>
         </div>
     </div>

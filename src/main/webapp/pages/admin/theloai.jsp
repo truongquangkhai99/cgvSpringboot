@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
     <!DOCTYPE html>
 <html lang="en">
 
@@ -44,12 +45,13 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
+                                <c:forEach var="item" items="${ listCflim}" varStatus="index">
                                     <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
+                                        <td>${item.id}</td>
+                                        <td>${item.name}</td>
                                         <td>
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
+                                                data-bs-target="#exampleModal${item.id}">
                                                 Update
                                             </button>
                                             <button type="button" class="btn btn-danger">
@@ -58,36 +60,9 @@
                                         </td>
 
                                     </tr>
-                                    <!-- Modal Add-->
-                                    <div class="modal fade" id="exampleModalAdd" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="mb-3">
-                                                            <label for="category-film"
-                                                                class="col-form-label">Name:</label>
-                                                            <input type="text" class="form-control" id="category-film">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                     <!-- Modal Update-->
-                                    <!-- Modal Update-->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    <div class="modal fade" id="exampleModal${item.id}" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -101,7 +76,7 @@
                                                         <div class="mb-3">
                                                             <label for="category-film"
                                                                 class="col-form-label">Name:</label>
-                                                            <input type="text" class="form-control" id="category-film">
+                                                            <input type="text" class="form-control" id="category-film" value="${item.name}">
                                                         </div>
                                                     </form>
                                                 </div>
@@ -114,13 +89,41 @@
                                         </div>
                                     </div>
                                     <!-- Modal Update-->
-
+									</c:forEach>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </main>
+            <!-- Modal Add-->
+            <div class="modal fade" id="exampleModalAdd" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thêm mới</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="category-film"
+                                        class="col-form-label">Name:</label>
+                                    <input type="text" class="form-control" id="category-film">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Update-->
             <%@ include file="/admin/footer/footer.jsp"  %>
         </div>
     </div>
