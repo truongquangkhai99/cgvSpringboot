@@ -135,7 +135,48 @@ and open the template in the editor.
 </div>
       </div>
         </div>
-        
+        <div>
+        <div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="headings d-flex justify-content-between align-items-center mb-3">
+                <h5>Unread comments ${ listRating.size()}</h5>
+                <div class="buttons"> <span class="badge bg-white d-flex flex-row align-items-center"> <span class="text-primary">Comments "ON"</span>
+                        <div class="form-check form-switch"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
+                    </span> </div>
+            </div>
+             <c:forEach var="item" items="${ listRating	}" varStatus="index">
+              <div class="card p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"> <span><small class="font-weight-bold text-primary">${item.rate}</small></div> <small>${item.createTime}</small>
+                </div>
+                <div class="action d-flex justify-content-between mt-2 align-items-center">
+                    <div class="reply px-4"> <p>${item.rate}</p></div>
+                    <div class="icons align-items-center"> <i class="fa fa-star text-warning"></i> <i class="fa fa-check-circle-o check-icon"></i> </div>
+                </div>
+             
+            </div>
+            <div class="card p-3">
+               <form class="form-inline">
+					<div class="row">
+					 <div class="form-group  col-10">
+				    <label for="inputPassword2" class="sr-only">Password</label>
+				    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+				  </div>
+				  <div class="col-2">
+				    <button type="submit" class="btn btn-primary mb-2">Post</button>
+				  </div>
+					</div>
+				 
+				
+				</form>
+            </div>
+             </c:forEach>
+           
+        </div>
+    </div>
+</div>
+        </div>
        <%@ include file="/user/footer/footer.jsp"  %>
     </body>
 </html>

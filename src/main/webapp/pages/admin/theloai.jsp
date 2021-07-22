@@ -54,9 +54,11 @@
                                                 data-bs-target="#exampleModal${item.id}">
                                                 Update
                                             </button>
-                                            <button type="button" class="btn btn-danger">
-                                                Delete
-                                            </button>
+                                            <form action="<%= request.getContextPath() %>/admin/delete-theloai" class="btn btn-danger" method="post">
+                                          <input type="hidden" class="form-control" id="id" name="id" value="${item.id}" >
+                                          <button type="submit" style="background:none;border:none;color:white"> Delete</button>
+                                            </form>
+                                            
                                         </td>
 
                                     </tr>
@@ -109,18 +111,19 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form action="<%= request.getContextPath() %>/admin/add-theloai" method="post">
                                 <div class="mb-3">
                                     <label for="category-film"
                                         class="col-form-label">Name:</label>
-                                    <input type="text" class="form-control" id="category-film">
+                                    <input type="text" class="form-control" id="category-film" name="category-film">
                                 </div>
+                                <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save </button>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save </button>
+                            
                         </div>
                     </div>
                 </div>

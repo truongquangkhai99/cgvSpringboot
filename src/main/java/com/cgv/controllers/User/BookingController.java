@@ -50,7 +50,7 @@ public class BookingController {
 			response.setContentType("text/html;charset=UTF-8");
 			request.setCharacterEncoding("UTF-8");
 			for (Schedule schedule : listSchedule) {
-				pw.println(" <option value="+schedule.getId()+">"+schedule.getDate()+"</option>");
+				pw.println(" <option value="+schedule.getId()+">"+schedule.getDateschedule()+"</option>");
 			}
 			
 		} catch (IOException e) {

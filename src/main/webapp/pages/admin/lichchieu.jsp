@@ -1,5 +1,10 @@
+<%@page import="com.cgv.daoImpl.Admin.AdminScheduleDaoImpl"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@page import="com.cgv.daoImpl.Admin.AdminFilmDaoImpl" %> 
+<%@page import="com.cgv.models.*" %> 
     <!DOCTYPE html>
 <html lang="en">
 
@@ -46,27 +51,35 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
+                                <%  long millis=System.currentTimeMillis();   java.sql.Date dated=new java.sql.Date(millis);  %>
+                               
+                                 <c:forEach var="item" items="${list}" varStatus="index">
                                     <tr>
-                                        <td>1</td>
-                                        <td>System Architect</td>
-                                        <td>System Architect</td>
+                                        <td>${index.index +1 }</td>
+                                        <td>
+                                        <c:forEach var="item1" items="${lfilm}" varStatus="index">
+                                        ${item.filmId == item1.id?item1.filmName:null}
+                                        </c:forEach>
+                                        </td>
+                                        <td>${item.dateschedule }</td>
                                         <td>
                                             <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModalAddS">
+                                                data-bs-target="#exampleModalAddS${item.id }">
                                                 Add showtime
                                             </button>
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
+                                                data-bs-target="#exampleModal${item.id }">
                                                 Update
                                             </button>
-                                            <button type="button" class="btn btn-danger">
-                                                Delete
-                                            </button>
+                                              <form action="<%= request.getContextPath() %>/admin/delete-schedule" class="btn btn-danger" method="post">
+                                          <input type="hidden" class="form-control" id="id" name="id" value="${item.id}" >
+                                          <button type="submit" style="background:none;border:none;color:white"> Delete</button>
+                                            </form>
                                         </td>
 
                                     </tr>
                                     <!-- Modal AddShow-->
-                                    <div class="modal fade" id="exampleModalAddS" tabindex="-1"
+                                    <div class="modal fade" id="exampleModalAddS${item.id }" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -109,7 +122,60 @@
                                         </div>
                                     </div>
                                     <!-- Modal Show-->
-                                    <!-- Modal Add-->
+                                    
+                                    <!-- Modal Update-->
+                                    <div class="modal fade" id="exampleModal${item.id }" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cập nhập</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="<%= request.getContextPath() %>/admin/update-schedule"  method="post">
+                                                    <input type="hidden" class="form-control" id="id" name="id" value="${item.id}" >
+                                                        <div class="mb-3">
+                                                            <label for="film"
+                                                                class="col-form-label">Phim:</label>
+                                                            <select class="form-select" name="film"
+                                                                aria-label="Default select example">
+                                                                <option value="${item.filmId }" selected >
+                                                                <c:forEach var="item1" items="${lfilm}" varStatus="index">
+							                                        ${item.filmId == item1.id?item1.filmName:null}
+							                                        </c:forEach>
+                                                                </option>
+                                                                <c:forEach var="item1" items="${lfilm}" varStatus="index">
+                                                                <option value="${item1.id }">${item1.filmName }</option>
+                                                               
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="date-film" class="col-form-label">Ngày chiếu:</label>
+                                                            <input type="date" name="date-film" class="form-control" id="date-film" value="${item.dateschedule}" min="<%=dated %>">
+                                                        </div>
+                                                        <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal Update-->
+									</c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <!-- Modal Add-->
                                     <div class="modal fade" id="exampleModalAdd" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -120,80 +186,36 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form>
+                                                     <form action="<%= request.getContextPath() %>/admin/add-schedule"  method="post">
                                                         <div class="mb-3">
                                                             <label for="category-film"
                                                                 class="col-form-label">Phim:</label>
-                                                            <select class="form-select"
+                                                            <select class="form-select" name="film"
                                                                 aria-label="Default select example">
-                                                                <option selected>Open this select menu</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
+                                                                <option selected>Chọn phim</option>
+                                                                <c:forEach var="item" items="${lfilm}" varStatus="index">
+                                                                <option value="${item.id }">${item.filmName }</option>
+                                                               
+                                                                </c:forEach>
                                                             </select>
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="category-film" class="col-form-label">Ngày
+                                                            <label for="date-film" class="col-form-label">Ngày
                                                                 chiếu:</label>
-                                                            <input type="date" class="form-control" id="category-film">
+                                                            <input type="date" name="date-film" class="form-control" id="date-film" min="<%=dated %>">
                                                         </div>
+                                                        <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save </button>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save </button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Modal Update-->
-                                    <!-- Modal Update-->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Cập nhập</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="mb-3">
-                                                            <label for="category-film"
-                                                                class="col-form-label">Phim:</label>
-                                                            <select class="form-select"
-                                                                aria-label="Default select example">
-                                                                <option selected>Open this select menu</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="category-film" class="col-form-label">Ngày
-                                                                chiếu:</label>
-                                                            <input type="date" class="form-control" id="category-film">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Modal Update-->
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </main>
             <%@ include file="/admin/footer/footer.jsp"  %>
         </div>
     </div>

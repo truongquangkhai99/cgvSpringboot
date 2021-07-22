@@ -68,7 +68,11 @@
                     <td>${item.actor }</td>
                     <td>${item.director }</td>
                     <td>${item.duration }</td>
-                    <td>${item.id_cfilm }</td>
+                    <td>
+                    <c:forEach var="item1" items="${cfilm}" varStatus="index">
+                    ${item.id_cfilm == item1.id?item1.name:null }
+                    </c:forEach>
+                    </td>
                     <td><a href="" data-bs-toggle="modal" data-bs-target="#exampleModalDes${item.id }">${item.description }</a></td>
                     <td> <a href="" data-bs-toggle="modal" data-bs-target="#exampleModalView${item.id }">Link</a></td>
                     <td>

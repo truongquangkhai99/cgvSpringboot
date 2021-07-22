@@ -6,6 +6,7 @@ public class Rating {
 	private int filmId;
 	private String rate;
 	private int userId;
+	private String createTime;
 	public int getId() {
 		return id;
 	}
@@ -30,12 +31,19 @@ public class Rating {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public Rating(int id, int filmId, String rate, int userId) {
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+	public Rating(int id, int filmId, String rate, int userId, String createTime) {
 		super();
 		this.id = id;
 		this.filmId = filmId;
 		this.rate = rate;
 		this.userId = userId;
+		this.createTime = createTime;
 	}
 	public Rating() {
 		super();
@@ -43,8 +51,8 @@ public class Rating {
 	}
 	@Override
 	public String toString() {
-		return "Rating [id=" + id + ", filmId=" + filmId + ", rate=" + rate + ", userId=" + userId + "]";
+		return "Rating [id=" + id + ", filmId=" + filmId + ", rate=" + rate + ", userId=" + userId + ", createTime="
+				+ createTime + "]";
 	}
 	
-
 }
