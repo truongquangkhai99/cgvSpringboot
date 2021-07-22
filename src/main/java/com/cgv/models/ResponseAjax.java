@@ -3,6 +3,19 @@ package com.cgv.models;
 public class ResponseAjax {
 	private String status;
 	private String message;
+	public Object data;
+	public ResponseAjax(String status, String message, Object data) {
+		super();
+		this.status = status;
+		this.message = message;
+		this.data = data;
+	}
+	public Object getData() {
+		return data;
+	}
+	public void setData(Object data) {
+		this.data = data;
+	}
 	public String getStatus() {
 		return status;
 	}

@@ -13,8 +13,8 @@ import com.cgv.models.Rating;
 
 @Repository
 public class CommentDaoImpl implements CommentDao{
-	public static final String GET_COMMENT_BY_ID = "SELECT * FROM `ratings` WHERE id = ?";
-	public static final String COMMENT = "INSERT INTO `ratings`(`film_id`, `rate`, `user_id`) VALUES (?,?,?)";
+	public static final String GET_COMMENT_BY_ID = "SELECT * FROM `ratings` WHERE film_id = ?";
+	public static final String COMMENT = "INSERT INTO `ratings`( `film_id`, `rate`, `user_id`,`name_user`) VALUES (?,?,?,?)";
 	
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
@@ -28,7 +28,7 @@ public class CommentDaoImpl implements CommentDao{
 	@Override
 	public boolean comment(Rating rating) {
 		// TODO Auto-generated method stub
-		int result = _jdbcTemplate.update(COMMENT,rating.getFilmId(),rating.getRate(),rating.getUserId());
+		int result = _jdbcTemplate.update(COMMENT,rating.getFilmId(),rating.getRate(),rating.getUserId(),rating.getName_user());
 		if(result == 1) {
 			return true;
 		}

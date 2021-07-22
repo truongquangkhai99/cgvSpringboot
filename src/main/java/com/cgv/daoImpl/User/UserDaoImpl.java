@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.List;
 
 import com.cgv.dao.User.UserDao;
 import com.cgv.models.User;
@@ -21,6 +22,7 @@ public class UserDaoImpl implements UserDao {
 	public static final String CHECKEXIT = "SELECT count(*) FROM user where email = ? ";
 	public static final String CHECKLOGIN = "SELECT count(*) FROM user where email = ? and password = ?";
 	public static final String GETINFO = "SELECT * FROM user where email = ?";
+	public static final String GET_ALL_USER = "SELECT * FROM `user` ";
 	
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
@@ -87,5 +89,12 @@ public class UserDaoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<User> getAll() {
+		// TODO Auto-generated method stub
+		return _jdbcTemplate.query(GET_ALL_USER, new BeanPropertyRowMapper<>(User.class));
+	}
+	
 
 }

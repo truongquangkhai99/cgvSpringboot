@@ -54,6 +54,7 @@ and open the template in the editor.
           style="margin-right: 20px">
           Trailer
         </button>
+        <input type="hidden" class="form-control" name="idFilmT" id="idFilmT" value="${detailfilm.id}" placeholder="Password">
         <button onclick="getSchedule(${detailfilm.id});" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModa${detailfilm.id}" data-bs-whatever="@mdo">Đặt Vé</button>
         
         </div>
@@ -138,40 +139,99 @@ and open the template in the editor.
         <div>
         <div class="container mt-5">
     <div class="row d-flex justify-content-center">
-        <div class="col-md-8">
-            <div class="headings d-flex justify-content-between align-items-center mb-3">
-                <h5>Unread comments ${ listRating.size()}</h5>
+        <div  class="col-md-8">
+        <div id="responeAjax">
+        <div class="headings d-flex justify-content-between align-items-center mb-3">
+                <h5> Comments ${ listRating.size()}</h5>
                 <div class="buttons"> <span class="badge bg-white d-flex flex-row align-items-center"> <span class="text-primary">Comments "ON"</span>
                         <div class="form-check form-switch"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
                     </span> </div>
             </div>
+           
              <c:forEach var="item" items="${ listRating	}" varStatus="index">
               <div class="card p-3">
                 <div class="d-flex justify-content-between align-items-center">
-                    <div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"> <span><small class="font-weight-bold text-primary">${item.rate}</small></div> <small>${item.createTime}</small>
+                	
+                    	<div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"> <span><c:forEach var="item1" items="${User}" varStatus="index"><h5 style="margin-left: 10px">${item.userId == item1.id ? item1.username:null}</h5> </c:forEach></div> <small>${item.created_time}</small>
+                    
                 </div>
                 <div class="action d-flex justify-content-between mt-2 align-items-center">
                     <div class="reply px-4"> <p>${item.rate}</p></div>
                     <div class="icons align-items-center"> <i class="fa fa-star text-warning"></i> <i class="fa fa-check-circle-o check-icon"></i> </div>
                 </div>
-             
+             	
             </div>
+              </c:forEach>
+          </div>
+            
+            
             <div class="card p-3">
                <form class="form-inline">
 					<div class="row">
 					 <div class="form-group  col-10">
 				    <label for="inputPassword2" class="sr-only">Password</label>
-				    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+				    <input type="text" class="form-control" name="comment" id="comment" placeholder="Password">
+				    <p style="color: red;margin-top: 10px" id="error"></p>
 				  </div>
 				  <div class="col-2">
-				    <button type="submit" class="btn btn-primary mb-2">Post</button>
+				    <button type="button" onclick="postComment()" class="btn btn-primary mb-2">Post</button>
 				  </div>
 					</div>
 				 
 				
 				</form>
             </div>
-             </c:forEach>
+            
+           <script type="text/javascript">
+		           function postComment(){
+		        	var idFilm = document.getElementById("idFilmT").value;
+		        	var comment = document.getElementById("comment").value;
+		        	var row1 = document.getElementById("error");
+		        	 var row = document.getElementById("responeAjax");
+		   	    	$.ajax({
+		   	    		  url: "/user/comment",
+		   	    		  type:"post",
+		   	    		  data:{
+		   	    			idFilm:idFilm,
+		   	    			textComment:comment
+		   	    		  },
+		   	    		  success: function(data){
+		   	    			 if(data.status == "ErrorEmpty"){
+			    				  row1.innerHTML=data.message
+			    			  }else if(data.status == "Success"){
+			    				  var number = data.data.length
+								  var htmlData = `<div class="headings d-flex justify-content-between align-items-center mb-3">
+						                <h5> Comments `+data.data.length+`</h5>
+						                <div class="buttons"> <span class="badge bg-white d-flex flex-row align-items-center"> <span class="text-primary">Comments "ON"</span>
+						                        <div class="form-check form-switch"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
+						                    </span> </div>
+						            </div>`
+			    				  for(var i = 0; i<data.data.length;i++){
+			    					  
+			    					  htmlData +=` <div class="card p-3">
+			    			                <div class="d-flex justify-content-between align-items-center">
+			    		                	
+			    	                    	<div class="user d-flex flex-row align-items-center"> <img src="https://i.imgur.com/hczKIze.jpg" width="30" class="user-img rounded-circle mr-2"> <span>
+			    	                    	<h5 style="margin-left: 10px">`+data.data[i].name_user+`</h5></div> <small>`+data.data[i].created_time+`</small>
+			    	                    
+			    	                </div>
+			    	                <div class="action d-flex justify-content-between mt-2 align-items-center">
+			    	                    <div class="reply px-4"> <p>`+data.data[i].rate+`</p></div>
+			    	                    <div class="icons align-items-center"> <i class="fa fa-star text-warning"></i> <i class="fa fa-check-circle-o check-icon"></i> </div>
+			    	                </div>
+			    	             	
+			    	            </div>`
+			    				  }
+			    				  row.innerHTML = htmlData
+			    				  row1.innerHTML=""
+			    			  }else if(data.status == "ErrorLogin"){
+			    				  row1.innerHTML=data.message
+			    			  }
+		   	    		  }
+		   	    		});
+		   	    	
+		   	    }
+           </script>
            
         </div>
     </div>

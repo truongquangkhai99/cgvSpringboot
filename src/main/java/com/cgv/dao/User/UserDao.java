@@ -1,5 +1,7 @@
 package com.cgv.dao.User;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.cgv.models.User;
@@ -16,6 +18,8 @@ public interface UserDao {
 	 public boolean checkAccountExit(String email);
 	 
 	 public User getInformation(String email);
+	 
+	 public List<User> getAll();
 	 
 	 public void logout();
 

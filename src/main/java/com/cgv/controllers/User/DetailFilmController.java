@@ -15,10 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cgv.models.CategoryFilm;
 import com.cgv.models.Film;
 import com.cgv.models.Rating;
+import com.cgv.models.User;
 import com.cgv.service.User.FilmService;
 import com.cgv.serviceImpl.User.CategoryFilmServiceimpl;
 import com.cgv.serviceImpl.User.CommentServiceImpl;
 import com.cgv.serviceImpl.User.FilmServiceimpl;
+import com.cgv.serviceImpl.User.UserServiceImpl;
 
 @Controller
 public class DetailFilmController {
@@ -28,15 +30,20 @@ public class DetailFilmController {
 	public CategoryFilmServiceimpl cfilmSerivce;
 	@Autowired
 	public CommentServiceImpl commentServide;
+	@Autowired
+	public UserServiceImpl userImpl;
 	@GetMapping("/detail/{id}/{categoryFilmId}")
 	public ModelAndView detail(@PathVariable int id,@PathVariable int categoryFilmId) {
 		ModelAndView mv = new ModelAndView("detail");
 		Film detaifilm = filmSerivce.getDetailFilm(id);
 		List<Rating> listRating = commentServide.getCommentById(id);
+		System.out.println(listRating);
 		CategoryFilm cfilm = cfilmSerivce.getCFilm(categoryFilmId);
+		List<User> user = userImpl.getAll();
 		mv.addObject("detailfilm",detaifilm);
 		mv.addObject("cfilm",cfilm);
 		mv.addObject("listRating",listRating);
+		mv.addObject("User",user);
 		return mv;
 	}
 	

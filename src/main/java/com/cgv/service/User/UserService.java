@@ -1,5 +1,7 @@
 package com.cgv.service.User;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.cgv.models.User;
@@ -17,4 +19,6 @@ public interface UserService {
 	   public User getInformation(String email);
 	   
 	   public void logout();
+	   
+	   public List<User> getAll();
 }
