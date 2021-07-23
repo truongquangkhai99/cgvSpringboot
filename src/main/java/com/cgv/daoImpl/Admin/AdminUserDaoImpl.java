@@ -24,6 +24,7 @@ public class AdminUserDaoImpl implements AdminUserDao{
 	public static final String GET_ROLE="Select * from `role`";
 	public static final String CHECKLOGIN = "SELECT count(*) FROM user where role_id != 3 and email = ? and password = ? ";
 	public static final String CHECKEXIT = "SELECT count(*) FROM user where email = ? ";
+	public static final String GETINFO = "SELECT * FROM user where email = ?";
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
 	@Override
@@ -83,6 +84,11 @@ public class AdminUserDaoImpl implements AdminUserDao{
             return true;
         }
         return false;
+	}
+	@Override
+	public User getInformation(String email) {
+		// TODO Auto-generated method stub
+		return _jdbcTemplate.queryForObject(GETINFO, new BeanPropertyRowMapper<>(User.class) , new Object[] {email});
 	}
 	@Override
 	public String md5(String password) {

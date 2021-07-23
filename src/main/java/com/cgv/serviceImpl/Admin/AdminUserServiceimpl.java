@@ -52,6 +52,11 @@ public class AdminUserServiceimpl implements AdminUserService{
 		
 	}
 	@Override
+	public User getInformation(String email) {
+		// TODO Auto-generated method stub
+		return adminUserDao.getInformation(email);
+	}
+	@Override
 	public boolean checkAccountExit(String username) {
 		// TODO Auto-generated method stub
 		return false;

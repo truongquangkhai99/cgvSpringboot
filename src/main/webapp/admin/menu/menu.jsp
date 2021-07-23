@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="com.cgv.models.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <div id="layoutSidenav_nav">
+ <%   User user =(User) session.getAttribute("userAdmin"); %>
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
+                <%if(user.getRoleId() == 1){ %>
                     <div class="nav">
 
                         <a class="nav-link" href="<%= request.getContextPath() %>/admin/home">
@@ -55,6 +59,24 @@
                         </a>
 
                     </div>
+                    <%} else{ %>
+                    <div class="nav">
+
+                        <a class="nav-link" href="<%= request.getContextPath() %>/admin/home">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Bảng điều khiển
+                        </a>
+
+               
+
+                        <a class="nav-link" href="<%= request.getContextPath() %>/admin/booking">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Booking
+                        </a>
+                        
+
+                    </div>
+                    <%} %>
                 </div>
 
             </nav>

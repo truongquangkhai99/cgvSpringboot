@@ -27,4 +27,6 @@ public interface AdminUserService {
 	public void logout();
 	
 	public boolean checkAccountExit(String email);
+	
+	 public User getInformation(String email);
 }

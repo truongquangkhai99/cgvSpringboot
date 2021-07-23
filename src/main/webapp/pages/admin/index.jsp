@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="com.cgv.models.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +12,7 @@
     <div id="layoutSidenav">
         <%@ include file="/admin/menu/menu.jsp"  %>
         <div id="layoutSidenav_content">
+        <%   User userd =(User) session.getAttribute("userAdmin"); %>
             <main>
                 <div class="container-fluid px-4">
 
@@ -21,8 +24,11 @@
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">${cf } Phim trong Cinema </div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
+                                <%if(userd.getRoleId() == 1){ %>
                                     <a class="small text-white stretched-link" href="phim">View Details</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    <%} else{ %>
+                                    <%} %>
                                 </div>
                             </div>
                         </div>
@@ -30,8 +36,11 @@
                             <div class="card bg-warning text-white mb-4">
                                 <div class="card-body">${cu } Người dùng</div>
                                 <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <%if(userd.getRoleId() == 1){ %>
                                     <a class="small text-white stretched-link" href="nguoidung">View Details</a>
                                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    <%} else{ %>
+                                    <%} %>
                                 </div>
                             </div>
                         </div>
