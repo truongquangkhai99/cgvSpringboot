@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
     <!DOCTYPE html>
 <html lang="en">
 
@@ -28,9 +29,9 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
+                                        <th>Film</th>
                                         <th>Date</th>
                                         <th>Showtime</th>
-                                        <th>Film</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -38,33 +39,44 @@
                                 <tfoot>
                                     <tr>
                                         <th>STT</th>
+                                       	<th>Film</th>
                                         <th>Date</th>
                                         <th>Showtime</th>
-                                        <th>Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
+                                 <c:forEach var="item" items="${list}" varStatus="index">
                                     <tr>
-                                        <td>1</td>
-                                        <td>System Architect</td>
-                                        <td>System Architect</td>
-                                        <td>System Architect</td>
+                                        <td>${index.index+1 }</td>
+                                        <td>
+                                        <c:forEach var="item1" items="${listsche}" varStatus="index">
+                                        <c:forEach var="item2" items="${listfilm}" varStatus="index">
+                                        ${item.scheduleId == item1.id && item1.filmId == item2.id?item2.filmName:null }
+                                        </c:forEach>
+                                        </c:forEach>
+             
+                                        </td>
+                                        <td><c:forEach var="item1" items="${listsche}" varStatus="index">
+                                        ${item.scheduleId == item1.id?item1.dateschedule:null }
+                                        </c:forEach></td>
+                                        <td>${item.startTime } - ${item.endTime }</td>
                                         <td>
 
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
+                                                data-bs-target="#exampleModal${item.id }">
                                                 Update
                                             </button>
-                                            <button type="button" class="btn btn-danger">
-                                                Delete
-                                            </button>
+                                            <form action="<%= request.getContextPath() %>/admin/delete-showtime" class="btn btn-danger" method="post">
+                                          <input type="hidden" class="form-control" id="id" name="id" value="${item.id}" >
+                                          <button type="submit" style="background:none;border:none;color:white"> Delete</button>
+                                            </form>
                                         </td>
 
                                     </tr>
 
                                     <!-- Modal Update-->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    <div class="modal fade" id="exampleModal${item.id }" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -74,40 +86,43 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form>
+                                                    <form action="<%= request.getContextPath() %>/admin/update-showtime"  method="post">
+                                                    <input type="hidden" class="form-control" id="id" name="id" value="${item.id}" >
                                                         <div class="mb-3">
                                                             <div class="mb-3">
                                                                 <label for="category-film" class="col-form-label">Ngày
                                                                     chiếu:</label>
-                                                                <input type="date" class="form-control"
-                                                                    id="category-film" disabled>
+                                                                <input type="input" class="form-control"
+                                                                    id="category-film" value="<c:forEach var="item1" items="${listsche}" varStatus="index">
+                                        ${item.scheduleId == item1.id?item1.dateschedule:null }
+                                        </c:forEach>" disabled>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="category-film" class="col-form-label">Bắt
+                                                                <label for="start" class="col-form-label">Bắt
                                                                     đầu:</label>
                                                                 <input type="time" class="form-control"
-                                                                    id="category-film">
+                                                                    id="start" value="${item.startTime}" name="start">
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="category-film" class="col-form-label">Kết
+                                                                <label for="end" class="col-form-label">Kết
                                                                     thúc:</label>
                                                                 <input type="time" class="form-control"
-                                                                    id="category-film">
+                                                                    id="end" value="${item.endTime}" name="end">
                                                             </div>
                                                         </div>
-
+													<button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Modal Update-->
-
+										</c:forEach>
                                 </tbody>
                             </table>
                         </div>

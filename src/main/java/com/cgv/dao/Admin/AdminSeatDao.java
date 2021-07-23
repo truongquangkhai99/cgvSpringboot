@@ -16,5 +16,5 @@ public interface AdminSeatDao {
 	
 	public boolean delete(int id);
 	
-	public boolean edit(Seat id);
+	public boolean edit(Seat seat);
 }

@@ -16,5 +16,5 @@ public interface AdminShowtimeDao {
 	
 	public boolean delete(int id);
 	
-	public boolean edit(Showtime id);
+	public boolean edit(Showtime showtime);
 }
