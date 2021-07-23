@@ -89,34 +89,36 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form>
+                                                    <form action="<%= request.getContextPath() %>/admin/add-showtime"  method="post">
+                                                    <input type="hidden" class="form-control"
+                                                                    id="idsche" name="idsche" value="${item.id}" >
                                                         <div class="mb-3">
                                                             <div class="mb-3">
-                                                                <label for="category-film" class="col-form-label">Ngày
+                                                                <label for="idschea" class="col-form-label">Ngày
                                                                     chiếu:</label>
-                                                                <input type="date" class="form-control"
-                                                                    id="category-film" disabled>
+                                                                <input type="input" class="form-control"
+                                                                    id="idschea"  value="${item.dateschedule}" disabled >
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="category-film" class="col-form-label">Bắt
+                                                                <label for="start" class="col-form-label">Bắt
                                                                     đầu:</label>
                                                                 <input type="time" class="form-control"
-                                                                    id="category-film">
+                                                                    id="start" name="start">
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="category-film" class="col-form-label">Kết
+                                                                <label for="end" class="col-form-label">Kết
                                                                     thúc:</label>
                                                                 <input type="time" class="form-control"
-                                                                    id="category-film">
+                                                                    id="end" name="end">
                                                             </div>
                                                         </div>
-
+														<button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save </button>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save </button>
+                                                    
                                                 </div>
                                             </div>
                                         </div>

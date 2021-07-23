@@ -15,7 +15,9 @@ import com.cgv.daoImpl.Admin.AdminScheduleDaoImpl;
 import com.cgv.models.CategoryFilm;
 import com.cgv.models.Film;
 import com.cgv.models.Schedule;
+import com.cgv.models.Showtime;
 import com.cgv.serviceImpl.Admin.AdminFilmServiceimpl;
+import com.cgv.serviceImpl.Admin.AdminShowtimeServiceimpl;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,6 +26,8 @@ public class ScheduleAdminController {
 	public AdminScheduleDaoImpl adminScheduleServiceimpl;
 	@Autowired
 	public AdminFilmServiceimpl adminFilmServiceimpl;
+	@Autowired
+	public AdminShowtimeServiceimpl adminShowtimeServiceimpl;
 	@GetMapping("/lichchieu")
 	public ModelAndView lichchieu() {
 		ModelAndView mv = new ModelAndView("admin/lichchieu");
@@ -78,6 +82,26 @@ public class ScheduleAdminController {
 		schedule.setId(Integer.parseInt(id));
 		System.out.println(schedule);
 		boolean result = adminScheduleServiceimpl.edit(schedule);
+		if(result) {
+			System.out.println("Thành công");
+		}
+		else {
+			System.err.println("Thất bại");
+		}
+		return mv;
+	}
+	@PostMapping("/add-showtime")
+	public ModelAndView addShow(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("redirect:suatchieu");
+		String idsche = request.getParameter("idsche");
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
+		Showtime showtime = new Showtime();
+		showtime.setScheduleId(Integer.parseInt(idsche));
+		showtime.setStartTime(start);;
+		showtime.setEndTime(end);
+		System.out.println(showtime);
+		boolean result = adminShowtimeServiceimpl.insert(showtime);
 		if(result) {
 			System.out.println("Thành công");
 		}
