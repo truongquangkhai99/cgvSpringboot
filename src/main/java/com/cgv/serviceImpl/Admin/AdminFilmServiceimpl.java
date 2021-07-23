@@ -1,6 +1,7 @@
 package com.cgv.serviceImpl.Admin;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.cgv.dao.Admin.AdminFilmDao;
 import com.cgv.models.Film;
+import com.cgv.service.Admin.AdminFilmService;
 
 @Service
 public class AdminFilmServiceimpl implements AdminFilmService{

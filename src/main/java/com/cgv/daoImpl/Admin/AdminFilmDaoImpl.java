@@ -14,6 +14,9 @@ import com.cgv.models.Film;
 @Repository
 public class AdminFilmDaoImpl implements AdminFilmDao{
 	public static final String GET_ALL="Select * From `films`";
+	public static final String INSERT = "INSERT INTO `films`( `description`, `director`, `actor`, `duration`, `film_name`, `image`, `trailer`, `id_cfilm`) VALUES (?,?,?,?,?,?,?,?)";
+	
+	
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
 	@Override
@@ -24,6 +27,10 @@ public class AdminFilmDaoImpl implements AdminFilmDao{
 	}
 	@Override
 	public boolean insert(Film film) {
+		int result = _jdbcTemplate.update(INSERT,film.getDescription(),film.getDirector(),film.getActor(),film.getDuration(),film.getFilmName(),film.getImage(),film.getTrailer(),film.getId_cfilm());
+		if(result  == 1) {
+			return true;
+		}
 		return false;
 	}
 	@Override
