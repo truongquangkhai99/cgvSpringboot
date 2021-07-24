@@ -96,19 +96,19 @@
                                                             <div class="mb-3">
                                                                 <label for="idschea" class="col-form-label">Ngày
                                                                     chiếu:</label>
-                                                                <input type="input" class="form-control"
+                                                                <input type="input" class="form-control" required
                                                                     id="idschea"  value="${item.dateschedule}" disabled >
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="start" class="col-form-label">Bắt
                                                                     đầu:</label>
-                                                                <input type="time" class="form-control"
+                                                                <input type="time" class="form-control" required
                                                                     id="start" name="start">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="end" class="col-form-label">Kết
                                                                     thúc:</label>
-                                                                <input type="time" class="form-control"
+                                                                <input type="time" class="form-control" required
                                                                     id="end" name="end">
                                                             </div>
                                                         </div>
@@ -141,7 +141,7 @@
                                                         <div class="mb-3">
                                                             <label for="film"
                                                                 class="col-form-label">Phim:</label>
-                                                            <select class="form-select" name="film"
+                                                            <select class="form-select" name="film" required
                                                                 aria-label="Default select example">
                                                                 <option value="${item.filmId }" selected >
                                                                 <c:forEach var="item1" items="${lfilm}" varStatus="index">
@@ -156,7 +156,7 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="date-film" class="col-form-label">Ngày chiếu:</label>
-                                                            <input type="date" name="date-film" class="form-control" id="date-film" value="${item.dateschedule}" min="<%=dated %>">
+                                                            <input type="date" name="date-film" required class="form-control" id="date-film" value="${item.dateschedule}" min="<%=dated %>">
                                                         </div>
                                                         <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Close</button>
@@ -192,7 +192,7 @@
                                                         <div class="mb-3">
                                                             <label for="category-film"
                                                                 class="col-form-label">Phim:</label>
-                                                            <select class="form-select" name="film"
+                                                            <select class="form-select" name="film" required
                                                                 aria-label="Default select example">
                                                                 <option selected>Chọn phim</option>
                                                                 <c:forEach var="item" items="${lfilm}" varStatus="index">
@@ -204,7 +204,7 @@
                                                         <div class="mb-3">
                                                             <label for="date-film" class="col-form-label">Ngày
                                                                 chiếu:</label>
-                                                            <input type="date" name="date-film" class="form-control" id="date-film" min="<%=dated %>">
+                                                            <input type="date" name="date-film" required class="form-control" id="date-film" min="<%=dated %>">
                                                         </div>
                                                         <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Close</button>

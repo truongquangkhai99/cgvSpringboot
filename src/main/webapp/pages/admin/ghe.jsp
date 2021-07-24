@@ -78,7 +78,7 @@
                                                         <div class="mb-3">
                                                             <label for="name"
                                                                 class="col-form-label">Name:</label>
-                                                            <input type="text" class="form-control" id="name" name="name" value="${item.seatName}">
+                                                            <input type="text" class="form-control" id="name" name="name" value="${item.seatName}" required>
                                                         </div>
                                                         <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Close</button>
@@ -115,7 +115,7 @@
                                                         <div class="mb-3">
                                                             <label for="name"
                                                                 class="col-form-label">Name:</label>
-                                                            <input type="text" class="form-control" id="name" name="name">
+                                                            <input type="text" class="form-control" id="name" name="name" required>
                                                         </div>
                                                         <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Close</button>

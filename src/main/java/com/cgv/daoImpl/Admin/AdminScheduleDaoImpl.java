@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.cgv.dao.Admin.AdminScheduleDao;
 import com.cgv.models.Schedule;
 @Repository
-public class AdminScheduleDaoImpl implements AdminScheduleDao{
-	public static final String GET_ALL="Select * from `schedules`";
+public class AdminScheduleDaoImpl implements AdminScheduleDao{ 
+	public static final String GET_ALL="Select * from `schedules` ORDER BY dateschedule  DESC";
 	public static final String ADD="INSERT INTO `schedules` (`film_id`,`dateschedule`) VALUES (?,?) ";
 	public static final String DELETE="DELETE FROM `schedules` WHERE id = ? ";
 	public static final String UPDATE="UPDATE `schedules` SET film_id = ?,dateschedule = ? WHERE id = ?";

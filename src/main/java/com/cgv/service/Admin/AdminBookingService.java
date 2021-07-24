@@ -10,9 +10,7 @@ import com.cgv.models.Booking;
 public interface AdminBookingService {
 	public List<Booking> getAll();
 	
-	public boolean insert(Booking booking);
 	
-	public boolean delete(int id);
 	
 	public boolean edit(Booking id);
 }

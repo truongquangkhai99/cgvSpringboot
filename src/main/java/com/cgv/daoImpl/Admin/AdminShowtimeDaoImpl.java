@@ -13,7 +13,7 @@ import com.cgv.models.Showtime;
 
 @Repository
 public class AdminShowtimeDaoImpl implements AdminShowtimeDao{
-	public static final String GET_ALL="Select * from `showtimes`";
+	public static final String GET_ALL="Select * from `showtimes` ORDER BY id DESC";
 	public static final String ADD="INSERT INTO `showtimes` (`schedule_id`,`start_time`,`end_time`) VALUES (?,?,?) ";
 	public static final String DELETE="DELETE FROM `showtimes` WHERE id = ? ";
 	public static final String UPDATE="UPDATE `showtimes` SET start_time = ?,end_time = ? WHERE id = ?";

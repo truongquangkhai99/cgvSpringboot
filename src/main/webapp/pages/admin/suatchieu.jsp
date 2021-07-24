@@ -92,7 +92,7 @@
                                                             <div class="mb-3">
                                                                 <label for="category-film" class="col-form-label">Ngày
                                                                     chiếu:</label>
-                                                                <input type="input" class="form-control"
+                                                                <input type="text" class="form-control"
                                                                     id="category-film" value="<c:forEach var="item1" items="${listsche}" varStatus="index">
                                         ${item.scheduleId == item1.id?item1.dateschedule:null }
                                         </c:forEach>" disabled>
