@@ -15,8 +15,8 @@ import com.cgv.models.Film;
 public class AdminFilmDaoImpl implements AdminFilmDao{
 	public static final String GET_ALL="Select * From `films`";
 	public static final String INSERT = "INSERT INTO `films`( `description`, `director`, `actor`, `duration`, `film_name`, `image`, `trailer`, `id_cfilm`) VALUES (?,?,?,?,?,?,?,?)";
-	
-	
+	public static final String DELETE = "DELETE FROM `films` WHERE id = ?";
+	public static final String UPDATE = "UPDATE `films` SET `description`=?,`director`=?,`actor`=?,`duration`=?,`film_name`=?,`image`=?,`trailer`=?,`id_cfilm`= ? WHERE id = ?";
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
 	@Override
@@ -35,10 +35,18 @@ public class AdminFilmDaoImpl implements AdminFilmDao{
 	}
 	@Override
 	public boolean delete(int id) {
+		int result = _jdbcTemplate.update(DELETE,id);
+		if(result  == 1) {
+			return true;
+		}
 		return false;
 	}
 	@Override
-	public boolean edit(Film id) {
+	public boolean edit(Film film) {
+		int result = _jdbcTemplate.update(UPDATE,film.getDescription(),film.getDirector(),film.getActor(),film.getDuration(),film.getFilmName(),film.getImage(),film.getTrailer(),film.getId_cfilm(),film.getId());
+		if(result  == 1) {
+			return true;
+		}
 		return false;
 	}
 }

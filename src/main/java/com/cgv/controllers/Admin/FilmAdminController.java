@@ -67,13 +67,75 @@ public class FilmAdminController {
 			System.out.println("Rỗng");
 		}
 		String dirname = request.getServletContext().getRealPath("user/images");
+		
 		Path path = Paths.get(dirname);
 		try {
 			InputStream inputStream = image.getInputStream();
+			
 			String name = String.valueOf(new Date().getTime()+image.getOriginalFilename().toLowerCase());
 			Files.copy(inputStream, path.resolve(name),StandardCopyOption.REPLACE_EXISTING);
 			film.setImage(name);
 			boolean result = adminFilmServiceimpl.insert(film);
+			if(result) {
+				System.out.println("Thành công");
+			}else {
+				System.out.println("That bai");
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exceptione.p
+			e.printStackTrace();
+		}
+		
+		return mv;
+	 }
+	@PostMapping("/delete")
+	public ModelAndView delete(@RequestParam String id) {
+		
+		ModelAndView mv = new ModelAndView("redirect:phim");
+		
+		boolean result = adminFilmServiceimpl.delete(Integer.parseInt(id));
+		if(result) {
+			System.out.println("Thành công");
+		}else {
+			System.out.println("Thất bại");
+		}
+		return mv;
+		
+	}
+	@PostMapping("/update-film")
+	 public ModelAndView update(HttpServletRequest request,@RequestParam("file") MultipartFile image) {
+		ModelAndView mv = new ModelAndView("redirect:phim");
+		String nameFilm = request.getParameter("nameFilm");
+		String actorFilm = request.getParameter("actorFilm");
+		String directorFilm = request.getParameter("directorFilm");
+		String durationFilm = request.getParameter("durationFilm");
+		String description = request.getParameter("description");
+		String idCfilm = request.getParameter("idCfilm");
+		String trailerFilm = request.getParameter("trailerFilm");	
+		String idFilm = request.getParameter("idFilm");
+		Film film = new Film();
+		film.setDescription(description);
+		film.setId(Integer.parseInt(idFilm));
+		film.setActor(actorFilm);
+		film.setDirector(directorFilm);
+		film.setDuration(durationFilm);
+		film.setFilmName(nameFilm);
+		film.setId_cfilm(Integer.parseInt(idCfilm));
+		film.setTrailer(trailerFilm);
+		if(image.isEmpty()) {
+			System.out.println("Rỗng");
+		}
+		String dirname = request.getServletContext().getRealPath("user/images");
+		
+		Path path = Paths.get(dirname);
+		try {
+			InputStream inputStream = image.getInputStream();
+			
+			String name = String.valueOf(new Date().getTime()+image.getOriginalFilename().toLowerCase());
+			Files.copy(inputStream, path.resolve(name),StandardCopyOption.REPLACE_EXISTING);
+			film.setImage(name);
+			boolean result = adminFilmServiceimpl.edit(film);
 			if(result) {
 				System.out.println("Thành công");
 			}else {

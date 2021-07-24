@@ -56,11 +56,13 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                
-                <c:forEach var="item" items="${listF}" varStatus="index">
+                 <input type="hidden" value="${listF.size()}" id="dodai">
+                <c:forEach var="item" items="${listF}" varStatus="index10">
+                 
                   <tr>
-                    <td>${index.index +1}</td>
+                    <td>${index10.index +1}</td>
                     <td>
+                   
                       <a href="" data-bs-toggle="modal" data-bs-target="#exampleModalImg${item.id }"><img
                           style="width: 120px !important;height: 150px !important;" src="<c:url value="/user/images/${item.image}"/>" class="img-fluid"></a>
 
@@ -80,9 +82,13 @@
                         data-bs-target="#exampleModal${item.id }">
                         Update
                       </button>
-                      <button type="button" class="btn btn-danger">
-                        Delete
-                      </button>
+                      <form class="btn btn-danger" action="<%= request.getContextPath()%>/admin/delete" method="post">
+                      	  <input type="hidden" name="id" value="${item.id }">
+	                      <button type="submit" style="background: none;border: none;color: white">
+	                        Delete
+	                      </button>
+                      </form>
+                      
                     </td>
 
                   </tr>
@@ -140,56 +146,58 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form>
+                          <form action="<%= request.getContextPath()%>/admin/update-film" method="post" enctype="multipart/form-data">
+                          <input type="hidden"  value="${item.id }" name="idFilm">
                             <div class="row">
                               <div class="col-6">
                                 <div class="">
                                   <label for="film-name" class="col-form-label">Tên Phim:</label>
-                                  <input required="required" type="text" class="form-control" id="film-name" value="${item.filmName }">
+                                  <input required="required" name ="nameFilm" type="text" class="form-control" id="film-name" value="${item.filmName }">
                                 </div>
                                 <div class="">
                                   <label for="actor" class="col-form-label">Diễn viên:</label>
-                                  <input required="required" type="text" class="form-control" id="actor" value="${item.actor }">
+                                  <input required="required" name="actorFilm" type="text" class="form-control" id="actor" value="${item.actor }">
                                 </div>
                                 <div class="">
                                   <label for="director" class="col-form-label">Đạo diễn:</label>
-                                  <input required="required" type="text" class="form-control" id="director" value="${item.director }">
+                                  <input required="required" name="directorFilm" type="text" class="form-control" id="director" value="${item.director }">
                                 </div>
                                 <div class="">
                                   <label for="duration" class="col-form-label">Thời lượng:</label>
-                                  <input required="required" type="text" class="form-control" id="duration" value="${item.duration }">
+                                  <input required="required" name="durationFilm" type="text" class="form-control" id="duration" value="${item.duration }">
                                 </div>
                               </div>
                               <div class="col-6 ">
                                 <div class="">
                                   <label for="category-film" class="col-form-label">Thể loại:</label>
-                                  <select required="required" class="form-select" aria-label="Default select example" >
-                                    <option selected >Open this select menu</option>
-                                     <c:forEach var="item" items="${cfilm}" varStatus="index">
-                                      <option value="${item.id }">${item.name }</option>
+                                  <select required="required" name="idCfilm" class="form-select" aria-label="Default select example" >
+                                    <option selected value="${item.id_cfilm}">Open this select menu</option>
+                                     <c:forEach var="item1" items="${cfilm}" varStatus="index">
+                                      <option value="${item1.id }">${item1.name }</option>
                                     </c:forEach>
                                   </select>
                                 </div>
                                 <div class="mb-4 mt-4">
                                   <label for="exampleFormControlFile1">Ảnh Thumbnail</label>
-                                  <input required="required" type="file" class="form-control-file" id="exampleFormControlFile1">
+                                  <input required="required" type="file" name ="file" class="form-control-file" id="exampleFormControlFile1">
                                 </div>
                                 <div class="">
                                   <label for="category-film" class="col-form-label">Trailer:</label>
-                                  <input required="required" type="text" class="form-control" id="category-film">
+                                  <input required="required" name="trailerFilm" value="${item.trailer}" type="text" class="form-control" id="category-film">
                                 </div>
                               </div>
                             </div>
                             <div class="">
                               <label for="category-film" class="col-form-label">Nội dung:</label>
-                              <textarea required="required" name="description" id="editor1" cols="30" rows="30"></textarea>
+                              <textarea  name="description" id="editor${index10.index}" cols="30" rows="30">${item.description }</textarea>
                             </div>
+                            <div class="modal-footer">
+		                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		                          <button type="submit" class="btn btn-primary">Save changes</button>
+		                        </div>
                           </form>
                         </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -211,32 +219,32 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <form action="<%=request.getContextPath()%>/admin/insert" method="post" enctype="multipart/form-data"  >
+                          <form action="<%=request.getContextPath() %>/admin/insert" method="post" enctype="multipart/form-data"  >
                             <div class="row">
                               <div class="col-6">
                                 <div class="">
                                   <label for="category-film" class="col-form-label">Tên Phim:</label>
-                                  <input required="required type="text" name ="nameFilm" class="form-control" id="category-film">
+                                  <input required="required" type="text" name ="nameFilm" class="form-control" id="category-film">
                                 </div>
                                 <div class="">
                                   <label for="category-film" class="col-form-label">Diễn viên:</label>
-                                  <input required="required type="text" name="actorFilm" class="form-control" id="category-film">
+                                  <input required="required" type="text" name="actorFilm" class="form-control" id="category-film">
                                 </div>
                                 <div class="">
                                   <label for="category-film" class="col-form-label">Đạo diễn:</label>
-                                  <input required="required type="text" name="directorFilm" class="form-control" id="category-film">
+                                  <input required="required" type="text" name="directorFilm" class="form-control" id="category-film">
                                 </div>
                                 <div class="">
                                   <label for="category-film" class="col-form-label">Thời lượng:</label>
-                                  <input required="required type="text" name="durationFilm" class="form-control" id="category-film">
+                                  <input required="required" type="text" name="durationFilm" class="form-control" id="category-film">
                                 </div>
                               </div>
                               <div class="col-6 ">
                                 <div class="">
                                   <label for="category-film" class="col-form-label">Thể loại:</label>
-                                  <select required="required name="idCfilm" class="form-select" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <c:forEach var="item" items="${cfilm}" varStatus="index">
+                                  <select required="required" name="idCfilm" class="form-select" aria-label="Default select example" >
+                                    <option selected >Open this select menu</option>
+                                     <c:forEach var="item" items="${cfilm}" varStatus="index">
                                       <option value="${item.id }">${item.name }</option>
                                     </c:forEach>
                                   </select>
@@ -247,17 +255,17 @@
                                 </div>
                                 <div class="">
                                   <label for="category-film" class="col-form-label">Trailer:</label>
-                                  <input required="required type="text" name="trailerFilm" class="form-control" id="category-film">
+                                  <input  type="text" name="trailerFilm" class="form-control" id="category-film">
                                 </div>
                               </div>
                             </div>
                             <div class="">
                               <label for="category-film" class="col-form-label">Nội dung:</label>
-                              <textarea required="required name="description" id="editor" cols="30" rows="30"></textarea>
+                              <textarea  name="description" id="editor" cols="30" rows="30"></textarea>
                             </div>
                              <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="submit" class="btn btn-primary">Save </button>
+	                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	                          <button  type="submit" class="btn btn-primary">Save </button>
                         </div>
                           </form>
                         </div>
@@ -280,13 +288,19 @@
 
     </script>
     <script>
-
-        ClassicEditor.create(document.querySelector('#editor1')).then(eidt => {
-            console.log("da" + eidt);
-        })
-            .catch(error => {
-                console.error(error);
-            });
+    	
+    	var dodai = document.getElementById("dodai").value;
+    
+    	for(var i = 0;i<dodai;i++){
+    		var name = "#editor"  + i
+    		 ClassicEditor.create(document.querySelector(name)).then(eidt => {
+    	            console.log("da" + eidt);
+    	        })
+    	            .catch(error => {
+    	                console.error(error);
+    	            });
+    	}
+       
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
