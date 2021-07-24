@@ -17,7 +17,7 @@ import com.cgv.models.User;
 
 @Repository
 public class AdminUserDaoImpl implements AdminUserDao{
-	public static final String GET_ALL="Select * from `user`";
+	public static final String GET_ALL="Select * from `user` ORDER BY role_id  ASC";
 	public static final String ADD="INSERT INTO `user`( `email`, `is_active`, `password`, `phone`, `role_id`, `username`) VALUES (?,?,?,?,?,?) ";
 	public static final String DELETE="DELETE FROM `user` WHERE id = ? ";
 	public static final String UPDATE="UPDATE `user` SET email = ?,password = ?,phone = ?, role_id= ?, username = ? WHERE id = ?";

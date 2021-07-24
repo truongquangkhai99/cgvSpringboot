@@ -24,11 +24,11 @@
                                     <div class="card-body">
                                         <form method="POST" action="<%=request.getContextPath()%>/admin/login" >
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" name="email" placeholder="name@example.com" />
+                                                <input class="form-control" id="inputEmail" type="email" name="email" placeholder="name@example.com"  required/>
                                                 <label for="inputEmail">Email address</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" name="pass" placeholder="Password" />
+                                                <input class="form-control" id="inputPassword" type="password" name="pass" placeholder="Password" required />
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                             

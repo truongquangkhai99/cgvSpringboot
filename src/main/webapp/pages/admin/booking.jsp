@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+     <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
     <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +14,7 @@
        <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Booking</h1>
+                    <h1 class="mt-4">Danh sách vé đã đặt</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                         <li class="breadcrumb-item active">Booking</li>
@@ -33,7 +35,7 @@
                                         <th>Seat</th>
                                         <th>Amount</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        
 
                                     </tr>
                                 </thead>
@@ -48,31 +50,63 @@
                                         <th>Seat</th>
                                         <th>Amount</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        
                                     </tr>
                                 </tfoot>
                                 <tbody>
+                                <c:forEach var="item" items="${listb}" varStatus="index">
                                     <tr>
-                                        <td>1</td>
-                                        <td>System Architect</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>System Architect</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
+                                        <td>${index.index+1 }</td>
                                         <td>
-                                            <button type="button" class="btn btn-success">
-                                                Accept
-                                            </button>
-                                            <button type="button" class="btn btn-danger">
-                                                Delete
-                                            </button>
+                                        <c:forEach var="item1" items="${listu}" varStatus="index">
+						                    ${item.userId == item1.id?item1.username:null }
+						                 </c:forEach>
+                    					</td>
+                                        <td>
+                                        <c:forEach var="item2" items="${listf}" varStatus="index">
+						                    ${item.filmId == item2.id?item2.filmName:null }
+						                 </c:forEach>
+                    					</td>
+                                        <td>
+                                        <c:forEach var="item3" items="${listsc}" varStatus="index">
+						                    ${item.scheduleId == item3.id?item3.dateschedule:null }
+						                 </c:forEach>
+                    					</td>
+                                        <td>
+                                        <c:forEach var="item4" items="${listsh}" varStatus="index">
+		                                        <c:if test="${item.showtimeId == item4.id}"> 
+												    ${item4.startTime} - ${item4.endTime}
+												</c:if> 
+						                    
+						                 </c:forEach>
+                    					</td>
+                                        <td>
+                                        <c:forEach var="item5" items="${listr}" varStatus="index">
+						                    ${item.roomId == item5.id?item5.roomName:null }
+						                 </c:forEach>
+                    					</td>
+                                        <td>
+                                        <c:forEach var="item6" items="${lists}" varStatus="index">
+						                    ${item.seatId == item6.id?item6.seatName:null }
+						                 </c:forEach>
+                    					</td>
+                                        <td><fmt:formatNumber type = "number" 
+         maxFractionDigits = "3" value = "${item.amount }" /> VND</td>
+                                        <td>
+                                        <c:if test="${item.status == 1}"> 
+										Đã xác nhận
+										</c:if> 
+										<c:if test="${item.status != 1}"> 
+										 <form action="<%= request.getContextPath() %>/admin/update-booking" class="btn btn-danger" method="post">
+                                          <input type="hidden" class="form-control" id="id" name="id" value="${item.id}" >
+                                          <button type="submit" style="background:none;border:none;color:white"> Accept</button>
+                                            </form>
+										</c:if> 
                                         </td>
+                                       
 
                                     </tr>
-
+</c:forEach>
 
                                 </tbody>
                             </table>
