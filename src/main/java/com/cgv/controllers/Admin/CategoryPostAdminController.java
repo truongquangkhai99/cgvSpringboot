@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cgv.models.CategoryFilm;
 import com.cgv.models.CategoryPost;
 import com.cgv.serviceImpl.Admin.AdminCategoryPostServiceimpl;
+import com.cgv.utils.MiddleWare;
 
 @Controller
 @RequestMapping("/admin")
@@ -22,11 +23,19 @@ public class CategoryPostAdminController {
 	@Autowired
 	public AdminCategoryPostServiceimpl adminCategoryPostServiceimpl;
 	@GetMapping("/loaibaiviet")
-	public ModelAndView loaibaiviet() {
-		ModelAndView mv = new ModelAndView("admin/loaibaiviet");
-		List<CategoryPost> list = new ArrayList<CategoryPost>();
-		list = adminCategoryPostServiceimpl.getAll();
-		mv.addObject("list", list);
+	public ModelAndView loaibaiviet(HttpServletRequest request) {
+		MiddleWare middleWare = new MiddleWare();
+		ModelAndView mv = new ModelAndView();
+		boolean check = middleWare.checkAdminLogin(request);
+		if(check) {
+			 mv = new ModelAndView("admin/loaibaiviet");
+			List<CategoryPost> list = new ArrayList<CategoryPost>();
+			list = adminCategoryPostServiceimpl.getAll();
+			mv.addObject("list", list);
+		}else {
+			mv = new ModelAndView("redirect:login");
+		}
+		
 		return mv;
 		
 	}

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cgv.daoImpl.Admin.AdminCategoryFilmDaoImpl;
 import com.cgv.models.CategoryFilm;
+import com.cgv.utils.MiddleWare;
 
 @Controller
 @RequestMapping("/admin")
@@ -23,11 +24,19 @@ public class CategoryFlimAdminController {
 	@Autowired
 	public AdminCategoryFilmDaoImpl  adminCategoryFilmDaoImpl;
 	@GetMapping("/theloai")
-	public ModelAndView theloai() {
-		ModelAndView mv = new ModelAndView("admin/theloai");
-		List<CategoryFilm> listCflim =  adminCategoryFilmDaoImpl.getAll();
-		mv.addObject("listCflim",listCflim);
-		System.out.println(listCflim);
+	public ModelAndView theloai(HttpServletRequest request) {
+		MiddleWare middleWare = new MiddleWare();
+		ModelAndView mv = new ModelAndView();
+		boolean check = middleWare.checkAdminLogin(request);
+		if(check) {
+			mv = new ModelAndView("admin/theloai");
+			List<CategoryFilm> listCflim =  adminCategoryFilmDaoImpl.getAll();
+			mv.addObject("listCflim",listCflim);
+			System.out.println(listCflim);
+		}else {
+			mv = new ModelAndView("redirect:login");
+		}
+		
 		return mv;
 		
 	}

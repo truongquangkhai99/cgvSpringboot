@@ -53,9 +53,11 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                 <c:forEach var="item" items="${list}" varStatus="index">
+                                 <input type="hidden" value="${list.size()}" id="dodai">
+                                 <c:forEach var="item" items="${list}" varStatus="index10">
+                                
                                     <tr>
-                                        <td>${index.index +1}</td>
+                                        <td>${index10.index +1}</td>
                                         <td>
                                              <a href="" data-bs-toggle="modal" data-bs-target="#exampleModalImg${item.id }"><img
                           style="width: 120px !important;height: 150px !important;" src="<c:url value="/user/images/${item.image}"/>" class="img-fluid"></a>
@@ -111,7 +113,7 @@
                                         </div>
                                     </div>
                                     <!-- Modal Descrup-->
-                                   
+                                   	
                                     <!-- Modal Update-->
                                     <div class="modal fade" id="exampleModal${item.id }" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -123,14 +125,15 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form>
+                                                    <form enctype="multipart/form-data" action="<%=request.getContextPath()%>/admin/update-post" method="post">
+                                                    <input type="hidden" value="${item.id }" name="idPost">
                                                         <div class="row">
                                                             <div class="col-6">
                                                                 <div class="">
                                                                     <label for="category-film"
                                                                         class="col-form-label">Tiêu đề:</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="category-film" required>
+                                                                      name="title" value="${item.title }"  id="category-film" required>
                                                                 </div>
 
                                                             </div>
@@ -138,12 +141,13 @@
                                                                 <div class="">
                                                                     <label for="category-film"
                                                                         class="col-form-label">Thể loại:</label>
-                                                                    <select class="form-select"
+                                                                    <select name="theloai" class="form-select"
                                                                         aria-label="Default select example" required>
-                                                                        <option selected>Open this select menu</option>
-                                                                        <option value="1">One</option>
-                                                                        <option value="2">Two</option>
-                                                                        <option value="3">Three</option>
+                                                           
+                                                                        <c:forEach var="item1" items="${clist}" varStatus="index">
+									                                      <option value="${item1.id }">${item1.name }</option>
+									                                    </c:forEach>
+                                                           
                                                                     </select>
                                                                 </div>
 
@@ -153,21 +157,20 @@
                                                             <label for="exampleFormControlFile1">Ảnh
                                                                 Thumbnail</label><br>
                                                             <input type="file" class="form-control-file"
-                                                                id="exampleFormControlFile1" required>
+                                                               name="file" id="exampleFormControlFile1" required>
                                                         </div>
                                                         <div class="">
-                                                            <label for="category-film" class="col-form-label">Nội
-                                                                dung:</label>
-                                                            <textarea name="description" id="editor1" cols="30"
-                                                                rows="30" required></textarea>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
+							                              <label for="category-film" class="col-form-label">Nội dung:</label>
+							                              <textarea   name="noidung" id="editor${index10.index}" cols="30" rows="30">${item.description}</textarea>
+							                            </div>
+							                            <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
                                                 </div>
+                                                    </form>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -190,14 +193,14 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form>
+                                                    <form action="<%=request.getContextPath()%>/admin/insert-post" method="post" enctype="multipart/form-data">
                                                         <div class="row">
                                                             <div class="col-6">
                                                                 <div class="">
                                                                     <label for="category-film"
                                                                         class="col-form-label">Tiêu đề:</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="category-film" required>
+                                                                       name="title"  id="category-film" required>
                                                                 </div>
 
                                                             </div>
@@ -205,12 +208,12 @@
                                                                 <div class="">
                                                                     <label for="category-film"
                                                                         class="col-form-label">Thể loại:</label>
-                                                                    <select class="form-select"
+                                                                    <select name="theloai" class="form-select"
                                                                         aria-label="Default select example" required>
                                                                         <option selected>Open this select menu</option>
-                                                                        <option value="1">One</option>
-                                                                        <option value="2">Two</option>
-                                                                        <option value="3">Three</option>
+                                                                         <c:forEach var="item1" items="${clist}" varStatus="index">
+									                                      <option value="${item1.id }">${item1.name }</option>
+									                                    </c:forEach>
                                                                     </select>
                                                                 </div>
 
@@ -220,21 +223,22 @@
                                                             <label for="exampleFormControlFile1">Ảnh
                                                                 Thumbnail</label><br>
                                                             <input type="file" class="form-control-file"
-                                                                id="exampleFormControlFile1" required>
+                                                                name ="file" id="exampleFormControlFile1" required>
                                                         </div>
                                                         <div class="">
                                                             <label for="category-film" class="col-form-label">Nội
                                                                 dung:</label>
-                                                            <textarea name="description" id="editor" cols="30"
-                                                                rows="30" required></textarea>
+                                                            <textarea name="noidung" name="description" id="editor" cols="30"
+                                                                rows="30" ></textarea>
                                                         </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
+                                                        <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save </button>
+                                                    <button type="submit" class="btn btn-primary">Add </button>
                                                 </div>
+                                                    </form>
+                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -252,14 +256,20 @@
             });
 
     </script>
-    <script>
-
-        ClassicEditor.create(document.querySelector('#editor1')).then(eidt => {
-            console.log("da" + eidt);
-        })
-            .catch(error => {
-                console.error(error);
-            });
+       <script>
+    	
+    	var dodai = document.getElementById("dodai").value;
+    
+    	for(var i = 0;i<dodai;i++){
+    		var name = "#editor"  + i
+    		 ClassicEditor.create(document.querySelector(name)).then(eidt => {
+    	            console.log("da" + eidt);
+    	        })
+    	            .catch(error => {
+    	                console.error(error);
+    	            });
+    	}
+       
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

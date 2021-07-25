@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class StatisticalAdminController {
 	@GetMapping("/thongke")
 	public ModelAndView thongke() {
+		
 		ModelAndView mv = new ModelAndView("admin/thongke");
 		
 		return mv;

@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cgv.models.Film;
 import com.cgv.models.Role;
+import com.cgv.models.Schedule;
+import com.cgv.models.Showtime;
 import com.cgv.models.User;
 import com.cgv.serviceImpl.Admin.AdminUserServiceimpl;
+import com.cgv.utils.MiddleWare;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,12 +25,20 @@ public class UserAdminController {
 	@Autowired
 	public AdminUserServiceimpl adminUserServiceimpl;
 	@GetMapping("/nguoidung")
-	public ModelAndView nguoidung() {
-		ModelAndView mv = new ModelAndView("admin/nguoidung");
-		List<User> list = adminUserServiceimpl.getAll();
-		List<Role> listR = adminUserServiceimpl.getRole();
-		mv.addObject("listR", listR);
-		mv.addObject("list",list);
+	public ModelAndView nguoidung(HttpServletRequest request) {
+		MiddleWare middleWare = new MiddleWare();
+		ModelAndView mv = new ModelAndView();
+		boolean check = middleWare.checkAdminLogin(request);
+		if(check) {
+			mv = new ModelAndView("admin/nguoidung");
+			List<User> list = adminUserServiceimpl.getAll();
+			List<Role> listR = adminUserServiceimpl.getRole();
+			mv.addObject("listR", listR);
+			mv.addObject("list",list);
+		}else {
+			mv = new ModelAndView("redirect:login");
+		}
+		
 		return mv;
 	}
 	@PostMapping("/delete-user")

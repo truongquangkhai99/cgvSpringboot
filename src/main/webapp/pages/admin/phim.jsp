@@ -189,7 +189,7 @@
                             </div>
                             <div class="">
                               <label for="category-film" class="col-form-label">Nội dung:</label>
-                              <textarea  name="description" id="editor${index10.index}" cols="30" rows="30">${item.description }</textarea>
+                              <textarea  name="description" id="editor${index10.index}" cols="30" rows="30">${item.description}</textarea>
                             </div>
                             <div class="modal-footer">
 		                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

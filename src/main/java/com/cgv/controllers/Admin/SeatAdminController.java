@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cgv.models.Room;
 import com.cgv.models.Seat;
 import com.cgv.serviceImpl.Admin.AdminSeatServiceimpl;
+import com.cgv.utils.MiddleWare;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,11 +22,19 @@ public class SeatAdminController {
 	@Autowired
 	public AdminSeatServiceimpl adminSeatServiceimpl;
 	@GetMapping("/ghe")
-	public ModelAndView ghe() {
-		ModelAndView mv = new ModelAndView("admin/ghe");
-		List<Seat> list = adminSeatServiceimpl.getAll();
-		System.out.println(list);
-		mv.addObject("list",list);
+	public ModelAndView ghe(HttpServletRequest request) {
+		MiddleWare middleWare = new MiddleWare();
+		ModelAndView mv = new ModelAndView();
+		boolean check = middleWare.checkAdminLogin(request);
+		if(check) {
+			 mv = new ModelAndView("admin/ghe");
+			List<Seat> list = adminSeatServiceimpl.getAll();
+			System.out.println(list);
+			mv.addObject("list",list);
+		}else {
+			mv = new ModelAndView("redirect:login");
+		}
+		
 		return mv;
 	}
 	@PostMapping("/delete-seat")

@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,9 +24,11 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cgv.models.CategoryFilm;
+import com.cgv.models.CategoryPost;
 import com.cgv.models.Film;
 import com.cgv.serviceImpl.Admin.AdminCategoryFilmServiceimpl;
 import com.cgv.serviceImpl.Admin.AdminFilmServiceimpl;
+import com.cgv.utils.MiddleWare;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,13 +38,21 @@ public class FilmAdminController {
 	@Autowired
 	public AdminCategoryFilmServiceimpl adminCategoryFilmServiceimpl;
 	@GetMapping("/phim")
-	public ModelAndView phim() {
-		ModelAndView mv = new ModelAndView("admin/phim");
-		List<Film> list = adminFilmServiceimpl.getAll();
-		List<CategoryFilm> cfilm= adminCategoryFilmServiceimpl.getAll();
-		mv.addObject("listF", list);
-		mv.addObject("cfilm", cfilm);
-		System.out.println(list);
+	public ModelAndView phim(HttpServletRequest request) {
+		MiddleWare middleWare = new MiddleWare();
+		ModelAndView mv = new ModelAndView();
+		boolean check = middleWare.checkAdminLogin(request);
+		if(check) {
+			 mv = new ModelAndView("admin/phim");
+			List<Film> list = adminFilmServiceimpl.getAll();
+			List<CategoryFilm> cfilm= adminCategoryFilmServiceimpl.getAll();
+			mv.addObject("listF", list);
+			mv.addObject("cfilm", cfilm);
+			System.out.println(list);
+		}else {
+			mv = new ModelAndView("redirect:login");
+		}
+	
 		return mv;
 		
 	}

@@ -26,6 +26,7 @@ import com.cgv.serviceImpl.Admin.AdminScheduleServiceimpl;
 import com.cgv.serviceImpl.Admin.AdminSeatServiceimpl;
 import com.cgv.serviceImpl.Admin.AdminShowtimeServiceimpl;
 import com.cgv.serviceImpl.Admin.AdminUserServiceimpl;
+import com.cgv.utils.MiddleWare;
 
 @Controller
 @RequestMapping("/admin")
@@ -44,23 +45,32 @@ public class BookingAdminController {
 	public AdminRoomServiceimpl adminRoomServiceimpl;
 	@Autowired
 	public AdminSeatServiceimpl adminSeatServiceimpl;
+
 	@GetMapping("/booking")
-	public ModelAndView booking() {
-		ModelAndView mv = new ModelAndView("admin/booking");
-		List<Booking> listb = adminBookingServiceimpl.getAll();
-		List<User> listu = adminUserServiceimpl.getAll();
-		List<Film> listf = adminFilmServiceimpl.getAll();
-		List<Schedule> listsc = adminScheduleServiceimpl.getAll();
-		List<Showtime> listsh = adminShowtimeServiceimpl.getAll();
-		List<Room> listr = adminRoomServiceimpl.getAll();
-		List<Seat> lists = adminSeatServiceimpl.getAll();
-		mv.addObject("listb", listb);
-		mv.addObject("listu", listu);
-		mv.addObject("listf", listf);
-		mv.addObject("listsc", listsc);
-		mv.addObject("listsh", listsh);
-		mv.addObject("listr", listr);
-		mv.addObject("lists", lists);
+	public ModelAndView booking(HttpServletRequest request) {
+		MiddleWare middleWare = new MiddleWare();
+		ModelAndView mv = new ModelAndView();
+		boolean check = middleWare.checkAdminLogin(request);
+		if(check) {
+			mv = new ModelAndView("admin/booking");
+			List<Booking> listb = adminBookingServiceimpl.getAll();
+			List<User> listu = adminUserServiceimpl.getAll();
+			List<Film> listf = adminFilmServiceimpl.getAll();
+			List<Schedule> listsc = adminScheduleServiceimpl.getAll();
+			List<Showtime> listsh = adminShowtimeServiceimpl.getAll();
+			List<Room> listr = adminRoomServiceimpl.getAll();
+			List<Seat> lists = adminSeatServiceimpl.getAll();
+			mv.addObject("listb", listb);
+			mv.addObject("listu", listu);
+			mv.addObject("listf", listf);
+			mv.addObject("listsc", listsc);
+			mv.addObject("listsh", listsh);
+			mv.addObject("listr", listr);
+			mv.addObject("lists", lists);
+		}else {
+			mv = new ModelAndView("redirect:login");
+		}
+		
 		return mv;
 		
 	}

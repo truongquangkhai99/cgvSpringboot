@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cgv.models.CategoryPost;
+import com.cgv.models.Post;
 import com.cgv.models.Room;
 import com.cgv.serviceImpl.Admin.AdminRoomServiceimpl;
+import com.cgv.utils.MiddleWare;
 
 @Controller
 @RequestMapping("/admin")
@@ -20,10 +23,18 @@ public class RoomAdminController {
 	@Autowired
 	public AdminRoomServiceimpl adminRoomServiceimpl;
 	@GetMapping("/phong")
-	public ModelAndView phong() {
-		ModelAndView mv = new ModelAndView("admin/phong");
-		List<Room> list = adminRoomServiceimpl.getAll();
-		mv.addObject("list",list);
+	public ModelAndView phong(HttpServletRequest request) {
+		MiddleWare middleWare = new MiddleWare();
+		ModelAndView mv = new ModelAndView();
+		boolean check = middleWare.checkAdminLogin(request);
+		if(check) {
+			 mv = new ModelAndView("admin/phong");
+			List<Room> list = adminRoomServiceimpl.getAll();
+			mv.addObject("list",list);
+		}else {
+			mv = new ModelAndView("redirect:login");
+		}
+		
 		return mv;
 	}
 	@PostMapping("/delete-room")

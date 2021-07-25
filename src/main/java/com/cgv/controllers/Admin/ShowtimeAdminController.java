@@ -13,10 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cgv.models.Film;
 import com.cgv.models.Schedule;
+import com.cgv.models.Seat;
 import com.cgv.models.Showtime;
 import com.cgv.serviceImpl.Admin.AdminFilmServiceimpl;
 import com.cgv.serviceImpl.Admin.AdminScheduleServiceimpl;
 import com.cgv.serviceImpl.Admin.AdminShowtimeServiceimpl;
+import com.cgv.utils.MiddleWare;
 
 @Controller
 @RequestMapping("/admin")
@@ -28,14 +30,22 @@ public class ShowtimeAdminController {
 	@Autowired
 	public AdminFilmServiceimpl adminFilmServiceimpl;
 	@GetMapping("/suatchieu")
-	public ModelAndView suatchieu() {
-		ModelAndView mv = new ModelAndView("admin/suatchieu");
-		List<Showtime> list = adminShowtimeServiceimpl.getAll();
-		List<Schedule> listsche = adminScheduleServiceimpl.getAll();
-		List<Film> listfilm = adminFilmServiceimpl.getAll();
-		mv.addObject("list", list);
-		mv.addObject("listsche", listsche);
-		mv.addObject("listfilm", listfilm);
+	public ModelAndView suatchieu(HttpServletRequest request) {
+		MiddleWare middleWare = new MiddleWare();
+		ModelAndView mv = new ModelAndView();
+		boolean check = middleWare.checkAdminLogin(request);
+		if(check) {
+			 mv = new ModelAndView("admin/suatchieu");
+			List<Showtime> list = adminShowtimeServiceimpl.getAll();
+			List<Schedule> listsche = adminScheduleServiceimpl.getAll();
+			List<Film> listfilm = adminFilmServiceimpl.getAll();
+			mv.addObject("list", list);
+			mv.addObject("listsche", listsche);
+			mv.addObject("listfilm", listfilm);
+		}else {
+			mv = new ModelAndView("redirect:login");
+		}
+		
 		return mv;
 		
 	}
