@@ -15,6 +15,7 @@
       <li ><a  href="<%= request.getContextPath() %>/user/phim">Phim</a></li>
       <%if(userInfo != null) {%>
       	<li><a href="#"><%=userInfo.getUsername()%></a></li>
+      	<li><a href="<%= request.getContextPath() %>/user/lichsu">Lịch sử đặt vé</a></li>
       	<li><a href="<%= request.getContextPath() %>/user/logout">Đăng Xuất</a></li>
       <%} else{%>
          <li><a href="<%= request.getContextPath() %>/user/login">Đăng Nhập</a></li>

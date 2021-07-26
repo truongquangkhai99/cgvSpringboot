@@ -15,6 +15,7 @@ import com.cgv.models.Booking;
 public class AdminBookingDaoImpl implements AdminBookingDao{
 	public static final String GET_ALL="Select * from `booking` ORDER BY id DESC";
 	public static final String UPDATE="UPDATE `booking` SET status = ? WHERE id = ?";
+	public static final String GET_HIS="Select * from `booking` WHERE user_id = ? ORDER BY id DESC";
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
 	@Override
@@ -30,5 +31,11 @@ public class AdminBookingDaoImpl implements AdminBookingDao{
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public List<Booking> getHis(int id) {
+		List<Booking> listHis = new ArrayList<Booking>();
+		listHis = _jdbcTemplate.query(GET_HIS, new BeanPropertyRowMapper<>(Booking.class),id);
+		return listHis;
 	}
 }

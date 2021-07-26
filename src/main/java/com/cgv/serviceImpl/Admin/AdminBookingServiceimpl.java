@@ -23,5 +23,9 @@ public class AdminBookingServiceimpl implements AdminBookingService{
 	public boolean edit(Booking id) {
 		return adminBookingDao.edit(id);
 	}
+	@Override
+	public List<Booking> getHis(int id) {
+		return adminBookingDao.getHis(id);
+	}
 	
 }
