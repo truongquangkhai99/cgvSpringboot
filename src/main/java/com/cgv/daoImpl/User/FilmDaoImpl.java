@@ -15,8 +15,8 @@ import com.cgv.models.User;
 @Repository
 public class FilmDaoImpl implements FilmDao{
 	public static final String GET_CHITIET_FILM = "SELECT * FROM `films`  WHERE id = ?";
-	public static final String GET_FILM_DANG_CHIEU = "SELECT * FROM `films`  limit 4";
-	public static final String GET_FILM_SAP_CHIEU = "SELECT * FROM `films` "	;
+	public static final String GET_FILM_DANG_CHIEU = "SELECT DISTINCT a.* FROM `films` as a,`schedules` as b WHERE b.film_id = a.id AND b.dateschedule = DATE(NOW())";
+	public static final String GET_FILM_SAP_CHIEU = "SELECT DISTINCT * FROM `films` WHERE id NOT IN (SELECT film_id FROM `schedules`)"	;
 	public static final String SEARCH = "SELECT * FROM `films` WHERE film_name LIKE ?";
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;

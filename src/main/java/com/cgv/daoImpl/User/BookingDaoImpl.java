@@ -20,7 +20,7 @@ import com.cgv.models.Showtime;
 @Repository
 public class BookingDaoImpl implements BookingDao{
 	
-	public static final String GET_SCHEDULE = "SELECT * FROM `schedules` WHERE film_id = ?";
+	public static final String GET_SCHEDULE = "SELECT * FROM `schedules` WHERE dateschedule >= DATE(NOW()) AND film_id = ? ";
 	public static final String GET_SHOW_TIME = "SELECT * FROM `showtimes` WHERE schedule_id = ?";
 	public static final String GET_ROOM = "SELECT * FROM `room`";
 	public static final String GET_SEAT = "SELECT * from seats WHERE id NOT IN (SELECT seat_id FROM booking WHERE room_id = ? and showtime_id = ? and film_id =? and schedule_id = ? )  ";

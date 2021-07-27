@@ -53,10 +53,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Booking
                         </a>
-                        <a class="nav-link" href="<%= request.getContextPath() %>/admin/thongke">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Thống kê
-                        </a>
+                        
 
                     </div>
                     <%} else{ %>
