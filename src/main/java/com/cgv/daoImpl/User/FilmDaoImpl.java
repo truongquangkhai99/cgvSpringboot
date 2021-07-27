@@ -48,8 +48,9 @@ public class FilmDaoImpl implements FilmDao{
 
 	@Override
 	public List<Film> searchByName(String name) {
+		String nameSearch = "%" + name + "%";
 		List<Film> list = new ArrayList<Film>();
-		list = _jdbcTemplate.query(SEARCH, new BeanPropertyRowMapper<>(Film.class),new Object[] {name});
+		list = _jdbcTemplate.query(SEARCH, new BeanPropertyRowMapper<>(Film.class),new Object[] {nameSearch});
 		return list;
 	}
 
