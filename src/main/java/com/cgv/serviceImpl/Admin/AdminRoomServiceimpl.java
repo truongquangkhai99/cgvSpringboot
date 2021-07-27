@@ -31,4 +31,9 @@ public class AdminRoomServiceimpl implements AdminRoomService{
 	public boolean edit(Room room) {
 		return adminRoomDao.edit(room);
 	}
+	@Override
+	public Room getName(int id) {
+		// TODO Auto-generated method stub
+		return adminRoomDao.getName(id);
+	}
 }

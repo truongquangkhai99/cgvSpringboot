@@ -30,4 +30,9 @@ public class AdminScheduleServiceimpl implements AdminScheduleService{
 	public boolean edit(Schedule schedule) {
 		return adminScheduleDao.edit(schedule);
 	}
+	@Override
+	public Schedule getName(int id) {
+		// TODO Auto-generated method stub
+		return adminScheduleDao.getName(id);
+	}
 }

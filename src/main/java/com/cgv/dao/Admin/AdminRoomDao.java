@@ -17,4 +17,6 @@ public interface AdminRoomDao {
 	public boolean delete(int id);
 	
 	public boolean edit(Room room);
+	
+	public Room getName(int id);
 }

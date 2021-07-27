@@ -18,4 +18,7 @@ public interface AdminShowtimeService {
 	public boolean delete(int id);
 	
 	public boolean edit(Showtime id);
+	
+	public Showtime getName(int id);
 }
+

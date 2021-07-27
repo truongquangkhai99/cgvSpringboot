@@ -18,15 +18,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cgv.controllers.Admin.RoomAdminController;
+import com.cgv.controllers.Admin.ScheduleAdminController;
+import com.cgv.controllers.Admin.ShowtimeAdminController;
 import com.cgv.dao.User.BookingDao;
 import com.cgv.models.Booking;
+import com.cgv.models.BookingResponse;
+import com.cgv.models.Film;
 import com.cgv.models.ResponseAjax;
 import com.cgv.models.Room;
 import com.cgv.models.Schedule;
 import com.cgv.models.Seat;
 import com.cgv.models.Showtime;
 import com.cgv.models.User;
+import com.cgv.serviceImpl.Admin.AdminRoomServiceimpl;
+import com.cgv.serviceImpl.Admin.AdminScheduleServiceimpl;
+import com.cgv.serviceImpl.Admin.AdminShowtimeServiceimpl;
 import com.cgv.serviceImpl.User.BookingServiceImpl;
+import com.cgv.serviceImpl.User.FilmServiceimpl;
+import com.cgv.serviceImpl.User.SeatServiceImpl;
 
 @Controller
 @RequestMapping("/user")
@@ -39,6 +49,23 @@ public class BookingController {
 	
 	@Autowired
 	public BookingDao bookingDao;
+	
+	@Autowired
+	public FilmServiceimpl filmService;
+	
+	@Autowired
+	public AdminRoomServiceimpl roomAdminService;
+	
+	@Autowired
+	public AdminScheduleServiceimpl scheduleService;
+	
+	@Autowired
+	public AdminShowtimeServiceimpl showtimeService;
+	
+	
+	
+	@Autowired
+	public SeatServiceImpl seatImpl;
 	
 	@GetMapping("/get-list-schedule")
 	public void getSchedule(HttpServletRequest request,HttpServletResponse response) {
@@ -124,16 +151,28 @@ public class BookingController {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
 		Booking booking = new Booking();
+		BookingResponse bookingR = new BookingResponse();
 		String idSchedule = request.getParameter("idSchedule");
 		String idFilm = request.getParameter("idFilm");
 		String idShowtime = request.getParameter("idShowtime");
 		String idRoom = request.getParameter("idRoom");
 		String idSeat = request.getParameter("idSeat");
+		Film film = filmService.getDetailFilm(Integer.parseInt(idFilm));
+		Schedule schedule = scheduleService.getName(Integer.parseInt(idSchedule));
+		Room room = roomAdminService.getName(Integer.parseInt(idRoom));
+		Showtime showtime = showtimeService.getName(Integer.parseInt(idShowtime));
+		bookingR.setFilmName(film.getFilmName());
+		bookingR.setRoomName(room.getRoomName());
+		bookingR.setScheduleName(schedule.getDateschedule());
+		String thoigian = showtime.getStartTime() + "-" +showtime.getEndTime();
+		bookingR.setShowtimeName(thoigian);
+		bookingR.setAmount(GIA_VE);
 		booking.setScheduleId(Integer.parseInt(idSchedule));
 		booking.setFilmId(Integer.parseInt(idFilm));
 		booking.setRoomId(Integer.parseInt(idRoom));
 		List<Integer> arrSeat = bookingDao.convertStringArray(idSeat);
-		int amount = GIA_VE * arrSeat.size();
+		List<String> arrSend = new ArrayList<String>();
+		int amount = GIA_VE ;
 		booking.setAmount(amount);	
 		if("0".equals(idSchedule)||"0".equals(idShowtime)||"0".equals(idRoom)||"0".equals(idSeat)) {
 			rA.setStatus("ErrorEmpty");
@@ -147,12 +186,18 @@ public class BookingController {
 				booking.setShowtimeId(Integer.parseInt(idShowtime));
 				booking.setUserId(user.getId());
 				for (int i = 0; i < arrSeat.size(); i++) {
+					Seat seata = seatImpl.getNameSeat(arrSeat.get(i));
+					System.out.println(seata);
+					arrSend.add(seata.getSeatName());
 					booking.setSeatId(arrSeat.get(i));
-					 resultBooking = bookingDao.bookingTicket(booking);
+					resultBooking = bookingDao.bookingTicket(booking);
 				}			
 				if(resultBooking) {
 					rA.setStatus("Success");
 					rA.setMessage("✅ Đặt vé thành công");
+					rA.setNameSeat(arrSend);
+					rA.setListName(bookingR);
+					
 				}else {
 					rA.setStatus("Error");
 					rA.setMessage("❌ Đặt vé thất bại");

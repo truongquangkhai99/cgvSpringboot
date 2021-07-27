@@ -42,7 +42,7 @@
   <section id="main">
     <!--showcase----------------------->
     <!--heading------------->
-    <h1 class="showcase-heading">Phim Sắp Chiếu</h1>
+    <h1 id="nameT" class="showcase-heading">Phim Sắp Chiếu</h1>
 
     <ul id="autoWidth" class="cs-hidden">
     <c:forEach var="item" items="${ listFilmSapChieu}" varStatus="index">
@@ -173,13 +173,13 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Hóa đơn</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div id="result" class="modal-body">
         
       </div>
-      <div class="modal-footer">
+      <div  class="modal-footer">
         <button  onclick="closeModel()" type="button" class="btn btn-danger" >OK</button>
  
       </div>
@@ -187,9 +187,7 @@
   </div>
 </div>
   </section>
-  <script type="text/javascript">
-     
-  </script>
+ 
   <script>
     $(document).ready(function () {
       $("#autoWidth,#autoWidth2").lightSlider({

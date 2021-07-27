@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.cgv.dao.Admin.AdminScheduleDao;
+import com.cgv.models.Film;
 import com.cgv.models.Schedule;
 @Repository
 public class AdminScheduleDaoImpl implements AdminScheduleDao{ 
@@ -16,6 +17,8 @@ public class AdminScheduleDaoImpl implements AdminScheduleDao{
 	public static final String ADD="INSERT INTO `schedules` (`film_id`,`dateschedule`) VALUES (?,?) ";
 	public static final String DELETE="DELETE FROM `schedules` WHERE id = ? ";
 	public static final String UPDATE="UPDATE `schedules` SET film_id = ?,dateschedule = ? WHERE id = ?";
+	public static final String GET_NAME = "SELECT * FROM `schedules` WHERE id = ?";
+	
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
 	@Override
@@ -47,5 +50,10 @@ public class AdminScheduleDaoImpl implements AdminScheduleDao{
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public Schedule getName(int id) {
+		// TODO Auto-generated method stub
+		return _jdbcTemplate.queryForObject(GET_NAME, new BeanPropertyRowMapper<>(Schedule.class) , new Object[] {id});
 	}
 }

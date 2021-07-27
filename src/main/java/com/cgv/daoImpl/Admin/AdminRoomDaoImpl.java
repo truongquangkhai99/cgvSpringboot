@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cgv.dao.Admin.AdminRoomDao;
 import com.cgv.models.Room;
+import com.cgv.models.Schedule;
 
 @Repository
 public class AdminRoomDaoImpl implements AdminRoomDao{
@@ -17,6 +18,8 @@ public class AdminRoomDaoImpl implements AdminRoomDao{
 	public static final String ADD="INSERT INTO `room` (`room_name`) VALUES (?) ";
 	public static final String DELETE="DELETE FROM `room` WHERE id = ? ";
 	public static final String UPDATE="UPDATE `room` SET room_name = ? WHERE id = ?";
+	public static final String GET_NAME = "SELECT * FROM `room` WHERE id = ?";
+	
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
 	@Override
@@ -48,5 +51,10 @@ public class AdminRoomDaoImpl implements AdminRoomDao{
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public Room getName(int id) {
+		// TODO Auto-generated method stub
+		return _jdbcTemplate.queryForObject(GET_NAME, new BeanPropertyRowMapper<>(Room.class) , new Object[] {id});
 	}
 }

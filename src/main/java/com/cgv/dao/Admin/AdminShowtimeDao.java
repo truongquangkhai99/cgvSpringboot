@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.cgv.models.Schedule;
 import com.cgv.models.Showtime;
 
 
@@ -17,4 +18,6 @@ public interface AdminShowtimeDao {
 	public boolean delete(int id);
 	
 	public boolean edit(Showtime showtime);
+	
+	public Showtime getName(int id);
 }

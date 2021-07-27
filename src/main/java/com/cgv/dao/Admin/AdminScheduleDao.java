@@ -16,4 +16,6 @@ public interface AdminScheduleDao {
 	public boolean delete(int id);
 	
 	public boolean edit(Schedule id);
+	
+	public Schedule getName(int id);
 }

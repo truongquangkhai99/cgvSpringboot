@@ -109,7 +109,16 @@
 		    			  if(data.status == "ErrorEmpty"){
 		    				  row1.innerHTML=data.message
 		    			  }else if(data.status == "Success"){
-		    				  dataHTML+=data.message;
+										 
+		    				  dataHTML+=`<p ><span style="font-weight:bold">Tên phim : </span>`+data.listName.filmName+`</p><br>
+										<p ><span style="font-weight:bold">Lịch chiếu : </span>`+data.listName.scheduleName+`</p><br>
+										<p ><span style="font-weight:bold">Suất chiếu : </span>`+data.listName.showtimeName+`</p><br>
+										<p ><span style="font-weight:bold">Phòng chiếu : </span>`+data.listName.roomName+`</p><br>`
+								dataHTML+=`<span style="font-weight:bold">Ghế : `			
+							  for(var i = 0; i<data.nameSeat.length ;i++){
+								dataHTML+=`<span>`+data.nameSeat[i]+" "+`</span>`	
+							 }		 
+							 dataHTML+=`<p style="margin-top: 30px"><span style="font-weight:bold">⚠️ Lưu ý  : Đơn hàng đã đặt thành công vui lòng chụp lại màn hình và đưa cho nhân viên khi thanh toán tại rạp</span></p><br>`		  
 		    				  row.innerHTML = dataHTML;
 		    				  document.getElementById(nameBtn).click();
 		              		  $(document).ready(function(){

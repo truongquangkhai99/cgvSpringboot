@@ -17,4 +17,6 @@ public interface AdminRoomService {
 	public boolean delete(int id);
 	
 	public boolean edit(Room id);
+	
+	public Room getName(int id);
 }

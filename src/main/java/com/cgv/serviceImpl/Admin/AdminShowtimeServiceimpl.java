@@ -30,5 +30,10 @@ public class AdminShowtimeServiceimpl implements AdminShowtimeService{
 	public boolean edit(Showtime showtime) {
 		return adminShowtimeDao.edit(showtime);
 	}
+	@Override
+	public Showtime getName(int id) {
+		// TODO Auto-generated method stub
+		return adminShowtimeDao.getName(id);
+	}
 
 }

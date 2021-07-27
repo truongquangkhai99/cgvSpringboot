@@ -53,6 +53,11 @@ public class Rating {
 		this.created_time = created_time;
 		this.name_user = name_user;
 	}
+	@Override
+	public String toString() {
+		return "Rating [id=" + id + ", filmId=" + filmId + ", rate=" + rate + ", userId=" + userId + ", created_time="
+				+ created_time + ", name_user=" + name_user + "]";
+	}
 	public Rating() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.cgv.dao.Admin.AdminShowtimeDao;
+import com.cgv.models.Schedule;
 import com.cgv.models.Showtime;
 
 @Repository
@@ -17,6 +18,7 @@ public class AdminShowtimeDaoImpl implements AdminShowtimeDao{
 	public static final String ADD="INSERT INTO `showtimes` (`schedule_id`,`start_time`,`end_time`) VALUES (?,?,?) ";
 	public static final String DELETE="DELETE FROM `showtimes` WHERE id = ? ";
 	public static final String UPDATE="UPDATE `showtimes` SET start_time = ?,end_time = ? WHERE id = ?";
+	public static final String GET_NAME = "SELECT * FROM `showtimes` WHERE id = ?";
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
 	@Override
@@ -48,5 +50,10 @@ public class AdminShowtimeDaoImpl implements AdminShowtimeDao{
 			return true;
 		}
 		return false;
+	}
+	@Override
+	public Showtime getName(int id) {
+		// TODO Auto-generated method stub
+		return _jdbcTemplate.queryForObject(GET_NAME, new BeanPropertyRowMapper<>(Showtime.class) , new Object[] {id});
 	}
 }
