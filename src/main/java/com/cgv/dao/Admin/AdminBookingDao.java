@@ -11,4 +11,6 @@ public interface AdminBookingDao {
 	public List<Booking> getAll();
 	
 	public boolean edit(Booking id);
+	
+	public List<Booking> getHis(int id);
 }
