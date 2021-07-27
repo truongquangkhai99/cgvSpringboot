@@ -118,7 +118,7 @@
 							  for(var i = 0; i<data.nameSeat.length ;i++){
 								dataHTML+=`<span>`+data.nameSeat[i]+" "+`</span>`	
 							 }		 
-							 dataHTML+=`<p style="margin-top: 30px"><span style="font-weight:bold">⚠️ Lưu ý  : Đơn hàng đã đặt thành công vui lòng chụp lại màn hình và đưa cho nhân viên khi thanh toán tại rạp</span></p><br>`		  
+							 dataHTML+=`<p style="margin-top: 30px"><span >⚠️ Lưu ý  : Đơn hàng đã đặt thành công vui lòng chụp lại màn hình và đưa cho nhân viên khi thanh toán tại rạp</span></p><br>`		  
 		    				  row.innerHTML = dataHTML;
 		    				  document.getElementById(nameBtn).click();
 		              		  $(document).ready(function(){

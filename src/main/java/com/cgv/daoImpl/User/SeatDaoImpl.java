@@ -12,6 +12,7 @@ import com.cgv.models.Seat;
 @Repository
 public class SeatDaoImpl implements SeatDao{
 	public static final String GET_NAME = "SELECT * FROM `seats` WHERE id = ?";
+	
 	@Autowired
 	public JdbcTemplate _jdbcTemplate;
 
