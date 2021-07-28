@@ -53,11 +53,11 @@
                         </div>
                          <p style="color: red">${mess != null ? mess :null}</p>
                         <div class="form-group">
-                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" value="1" required/>
                             <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
                         </div>
                         <div class="form-group form-button">
-                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                            <input type="submit" name="signup" id="signup" class="form-submit" style="background-color:#A9A9A9" value="Register"/>
                         </div>
                     </form>
                    	
@@ -69,6 +69,16 @@
             </div>
         </div>
     </section>
+     <script language="javascript">
+            document.getElementById('agree-term').onclick = function(e){
+                if (this.checked){
+                	document.getElementById("signup").style.background='#d42304';
+                }
+                else{
+                	document.getElementById("signup").style.background='#A9A9A9';
+                }
+            };
+        </script>
     <!--footer------------------>
     <%@ include file="/user/footer/footer.jsp"  %>
 </body>

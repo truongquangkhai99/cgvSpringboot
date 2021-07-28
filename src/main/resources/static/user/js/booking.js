@@ -102,7 +102,7 @@
 		    			  idSeat:JSON.stringify(idSeat)
 		    		  },
 		    		  success: function(data){
-		    			  
+		    			  var tongtien = 0;
 		    			  var row = document.getElementById("result");
 		    			  var row1 = document.getElementById(nameError);
 		    			  var dataHTML = '';
@@ -116,8 +116,10 @@
 										<p ><span style="font-weight:bold">Phòng chiếu : </span>`+data.listName.roomName+`</p><br>`
 								dataHTML+=`<span style="font-weight:bold">Ghế : `			
 							  for(var i = 0; i<data.nameSeat.length ;i++){
-								dataHTML+=`<span>`+data.nameSeat[i]+" "+`</span>`	
-							 }		 
+								dataHTML+=`<span>`+data.nameSeat[i]+" "+`</span>`
+								tongtien = tongtien + 65000	;
+							 }	
+							 dataHTML+=`<p style="margin-top: 25px" ><span style="font-weight:bold">Tổng tiền : </span>`+tongtien+` VND</p><br>`
 							 dataHTML+=`<p style="margin-top: 30px"><span >⚠️ Lưu ý  : Đơn hàng đã đặt thành công vui lòng chụp lại màn hình và đưa cho nhân viên khi thanh toán tại rạp</span></p><br>`		  
 		    				  row.innerHTML = dataHTML;
 		    				  document.getElementById(nameBtn).click();

@@ -47,7 +47,8 @@ public class AuthenticationController {
 		}else {
 			boolean result = userService.register(user);
 		    if(result) {   	
-		    	mv.addObject("mess","Register successfully");	
+		    	 mv = new ModelAndView("redirect:login");	
+		    	 return mv;
 		    }else {
 		    	mv.addObject("mess","Email is exited");	
 		    }

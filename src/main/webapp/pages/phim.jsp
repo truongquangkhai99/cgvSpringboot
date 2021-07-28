@@ -88,6 +88,7 @@
   </div>
   <section id="movies-list">
     <!--box-1------------------------>
+    <input type="hidden" value="${listFilmDangChieu.size()}" id="dodai">
     <c:forEach var="item" items="${ listFilmDangChieu}" varStatus="index">
     <div>
     <div class="movies-box">
@@ -100,7 +101,7 @@
       <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }">${item.filmName } </a>
       <!-- Button trigger modal -->
       <div class="button--movie">
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${item.id}"
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${index10.index}"
           style="margin-right: 20px">
           Trailer
         </button>
@@ -109,7 +110,7 @@
       </div>
     </div>
     <!-- Modal Trailer -->
-    <div class="modal fade" id="exampleModal${item.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal${index10.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-body">
@@ -119,6 +120,21 @@
       </div>
     </div>
     </div>
+    <script>
+    var dodai = document.getElementById("dodai").value;
+    
+	for(var i = 0;i<dodai;i++){
+		var name = "#exampleModal"  + i
+		var namei= "#exampleModal"  + i + " "+"iframe"
+		
+    $(name).on("hidden.bs.modal", function (e) {
+      $(namei).attr(
+        "src",
+        $(namei).attr("src")
+      );
+    });
+	}
+  </script>
 	<!--  Modak Booking -->
 	<div class="modal fade" id="exampleModa${item.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -157,6 +173,9 @@
 			  <option  value="0">Chọn ghế</option>
 			  
 			</select>
+          </div>
+          <div class="mb-3">
+          <label for="roomaa" class="col-form-label">Giá vé: 65.000 VND / vé</label>
           </div>
           <p style="color: red" id="resultError${ item.id}"></p>
         </form>

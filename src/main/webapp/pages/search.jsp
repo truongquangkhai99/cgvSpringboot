@@ -43,6 +43,9 @@
     <h2>Kết quả tìm kiếm</h2>
   </div>
   <section id="movies-list">
+  <c:if test="${listSearch.size() == 0}"> 
+		<h2 class="text-danger">Không tìm thấy kết quả </h2>
+</c:if> 
     <!--box-1------------------------>
     <c:forEach var="item" items="${ listSearch}" varStatus="index">
     <div>

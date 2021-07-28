@@ -37,7 +37,6 @@
                                         <th>Email</th>
                                         <th>Password</th>
                                         <th>Role</th>
-                                        <th>Status</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -49,7 +48,6 @@
                                         <th>Email</th>
                                         <th>Password</th>
                                         <th>Role</th>
-                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>
@@ -63,7 +61,6 @@
                                         <td><c:forEach var="item1" items="${listR}" varStatus="index">
                                         ${item.roleId == item1.id?item1.roleName:null }
                                         </c:forEach></td>
-                                        <td>1</td>
                                         <td>
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal${item.id }">

@@ -32,6 +32,7 @@
                   <tr>
                     <th>STT</th>
                     <th>Film</th>
+                    <th>Name</th>
                     <th>Actor</th>
                     <th>Director</th>
                     <th>Duration</th>
@@ -46,6 +47,7 @@
                   <tr>
                     <th>STT</th>
                     <th>Film</th>
+                    <th>Name</th>
                     <th>Actor</th>
                     <th>Director</th>
                     <th>Duration</th>
@@ -67,6 +69,7 @@
                           style="width: 120px !important;height: 150px !important;" src="<c:url value="/user/images/${item.image}"/>" class="img-fluid"></a>
 
                     </td>
+                    <td>${item.filmName }</td>
                     <td>${item.actor }</td>
                     <td>${item.director }</td>
                     <td>${item.duration }</td>
