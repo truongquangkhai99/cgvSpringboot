@@ -58,8 +58,8 @@
       <!--text--------->
       <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }">${item.filmName } </a>
       <!-- Button trigger modal -->
-       <div class="button--movie">
-        <button style="margin-bottom: 15px" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${item.id}"
+       <div style="margin-bottom: 15px" class="button--movie">
+        <button  type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${item.id}"
           style="margin-right: 20px">
           Trailer
         </button>
