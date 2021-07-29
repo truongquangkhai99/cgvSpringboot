@@ -14,7 +14,7 @@
   <script src="<c:url value="/user/js/JQuery3.3.1.js"/>" type="text/javascript"></script>
   <script src="<c:url value="/user/js/lightslider.js"/>" type="text/javascript"></script>
   <script src="<c:url value="/user/js/booking.js"/>" type="text/javascript"></script>
-
+	<script src="<c:url value="/user/js/video.js"/>" type="text/javascript"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
   <link rel="shortcut icon" href="<c:url value="/user/images/fav icon.png"/>"/>
@@ -49,8 +49,8 @@
     <li class="item-a">
         <!--showcase-box------------------->
         <div class="showcase-box">
-           <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }"><img  src="<c:url value="/user/images/${item.image}"/>" />
-        </div></a> 
+           <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }"><img  src="<c:url value="/user/images/${item.image}"/>" /></a>
+        </div> 
       </li>
 	   
 	</c:forEach>
@@ -89,7 +89,7 @@
   <section id="movies-list">
     <!--box-1------------------------>
     <input type="hidden" value="${listFilmDangChieu.size()}" id="dodai">
-    <c:forEach var="item" items="${ listFilmDangChieu}" varStatus="index">
+    <c:forEach var="item" items="${ listFilmDangChieu}" varStatus="index1">
     <div>
     <div class="movies-box">
       <!--img------------>
@@ -101,7 +101,7 @@
       <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }">${item.filmName } </a>
       <!-- Button trigger modal -->
       <div class="button--movie">
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${index10.index}"
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${index1.index+1}"
           style="margin-right: 20px">
           Trailer
         </button>
@@ -110,7 +110,7 @@
       </div>
     </div>
     <!-- Modal Trailer -->
-    <div class="modal fade" id="exampleModal${index10.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal${index1.index+1}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-body">
@@ -120,21 +120,7 @@
       </div>
     </div>
     </div>
-    <script>
-    var dodai = document.getElementById("dodai").value;
-    
-	for(var i = 0;i<dodai;i++){
-		var name = "#exampleModal"  + i
-		var namei= "#exampleModal"  + i + " "+"iframe"
-		
-    $(name).on("hidden.bs.modal", function (e) {
-      $(namei).attr(
-        "src",
-        $(namei).attr("src")
-      );
-    });
-	}
-  </script>
+
 	<!--  Modak Booking -->
 	<div class="modal fade" id="exampleModa${item.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -218,7 +204,68 @@
       });
     });
   </script>
-  
+<script type="text/javascript">
+	$("#exampleModal1").on("hidden.bs.modal", function () {
+	    $("#exampleModal1 iframe").attr(
+	      "src",
+	      $("#exampleModal1 iframe").attr("src")
+	    );
+	  });
+	$("#exampleModal2").on("hidden.bs.modal", function () {
+	    $("#exampleModal2 iframe").attr(
+	      "src",
+	      $("#exampleModal2 iframe").attr("src")
+	    );
+	  });
+	$("#exampleModal3").on("hidden.bs.modal", function () {
+	    $("#exampleModal3 iframe").attr(
+	      "src",
+	      $("#exampleModal3 iframe").attr("src")
+	    );
+	  });
+	$("#exampleModal4").on("hidden.bs.modal", function () {
+	    $("#exampleModal4 iframe").attr(
+	      "src",
+	      $("#exampleModal4 iframe").attr("src")
+	    );
+	  });
+	$("#exampleModal5").on("hidden.bs.modal", function () {
+	    $("#exampleModal5 iframe").attr(
+	      "src",
+	      $("#exampleModal5 iframe").attr("src")
+	    );
+	  });
+	$("#exampleModal6").on("hidden.bs.modal", function () {
+	    $("#exampleModal6 iframe").attr(
+	      "src",
+	      $("#exampleModal6 iframe").attr("src")
+	    );
+	  });
+	$("#exampleModal7").on("hidden.bs.modal", function () {
+	    $("#exampleModal7 iframe").attr(
+	      "src",
+	      $("#exampleModal7 iframe").attr("src")
+	    );
+	  });
+	$("#exampleModal8").on("hidden.bs.modal", function () {
+	    $("#exampleModal8 iframe").attr(
+	      "src",
+	      $("#exampleModal8 iframe").attr("src")
+	    );
+	  });
+	$("#exampleModal9").on("hidden.bs.modal", function () {
+	    $("#exampleModal9 iframe").attr(
+	      "src",
+	      $("#exampleModal9 iframe").attr("src")
+	    );
+	  });
+	$("#exampleModal10").on("hidden.bs.modal", function () {
+	    $("#exampleModal3 iframe").attr(
+	      "src",
+	      $("#exampleModal10 iframe").attr("src")
+	    );
+	  });
+	</script>
    
   <!--footer------------------>
   

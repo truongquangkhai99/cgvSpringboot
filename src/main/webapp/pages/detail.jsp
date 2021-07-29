@@ -17,6 +17,7 @@ and open the template in the editor.
 	  <link rel="stylesheet" href="<c:url value="/user/css/lightslider.css"/>" />
 	  <script src="<c:url value="/user/js/JQuery3.3.1.js"/>" type="text/javascript"></script>
 	  <script src="<c:url value="/user/js/lightslider.js"/>" type="text/javascript"></script>
+	  	<script src="<c:url value="/user/js/video.js"/>" type="text/javascript"></script>
 	  <script src="<c:url value="/user/js/booking.js"/>" type="text/javascript"></script>
 	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 	    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
@@ -50,7 +51,7 @@ and open the template in the editor.
             <p ><span style="font-weight:bold">Thời lượng : </span>${detailfilm.duration } </p><br>
             <p ><span style="font-weight:bold">Nội dung : </span>${detailfilm.description } </p><br>
              <div class="button--movie">
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${detailfilm.id}"
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
           style="margin-right: 20px">
           Trailer
         </button>
@@ -59,7 +60,7 @@ and open the template in the editor.
         
         </div>
            
-         <div class="modal fade" id="exampleModal${detailfilm.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-body">
@@ -162,10 +163,7 @@ and open the template in the editor.
              	
             </div>
               </c:forEach>
-          </div>
-            
-            
-            <div class="card p-3">
+               <div class="card p-3">
                <form class="form-inline">
 					<div class="row">
 					 <div class="form-group  col-10">
@@ -181,6 +179,10 @@ and open the template in the editor.
 				
 				</form>
             </div>
+          </div>
+            
+            
+           
             
            <script type="text/javascript">
 		           function postComment(){
@@ -220,8 +222,25 @@ and open the template in the editor.
 			    	                    <div class="icons align-items-center"> <i class="fa fa-star text-warning"></i> <i class="fa fa-check-circle-o check-icon"></i> </div>
 			    	                </div>
 			    	             	
-			    	            </div>`
+			    	            </div>
+			    	         		`
 			    				  }
+			    	            htmlData += `<div class="card p-3">
+				    	               <form class="form-inline">
+			    						<div class="row">
+			    						 <div class="form-group  col-10">
+			    					    <label for="inputPassword2" class="sr-only">Password</label>
+			    					    <input type="text" class="form-control" name="comment" id="comment" placeholder="Password">
+			    					    <p style="color: red;margin-top: 10px" id="error"></p>
+			    					  </div>
+			    					  <div class="col-2">
+			    					    <button type="button" onclick="postComment()" class="btn btn-primary mb-2">Post</button>
+			    					  </div>
+			    						</div>
+			    					 
+			    					
+			    					</form>
+			    	            </div>`
 			    				  row.innerHTML = htmlData
 			    				  row1.innerHTML=""
 			    			  }else if(data.status == "ErrorLogin"){
@@ -236,6 +255,15 @@ and open the template in the editor.
         </div>
     </div>
 </div>
+<script type="text/javascript">
+	$("#exampleModal").on("hidden.bs.modal", function () {
+	    $("#exampleModal iframe").attr(
+	      "src",
+	      $("#exampleModal iframe").attr("src")
+	    );
+	  });
+
+	</script>
         </div>
        <%@ include file="/user/footer/footer.jsp"  %>
     </body>
