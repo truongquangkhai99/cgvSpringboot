@@ -26,7 +26,7 @@
     <!--search------------->
    <div>
    
-   	<ul style="margin-left: 40px;margin-bottom: -1px" class="menu">
+   	<ul style="margin-left: 40px" class="menu">
    	<%if(userInfo != null) {%>
       	<li><a style="font-size: 18px" href="#"><%=userInfo.getUsername()%></a></li>
    	<li><a style="font-size: 18px" href="<%= request.getContextPath() %>/user/logout">Đăng Xuất</a></li>
