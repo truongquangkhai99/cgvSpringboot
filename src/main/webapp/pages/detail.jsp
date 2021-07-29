@@ -168,7 +168,7 @@ and open the template in the editor.
 					<div class="row">
 					 <div class="form-group  col-10">
 				    <label for="inputPassword2" class="sr-only">Password</label>
-				    <input type="text" class="form-control" name="comment" id="comment" placeholder="Password">
+				    <input type="text" class="form-control" name="comment" id="comment" placeholder="">
 				    <p style="color: red;margin-top: 10px" id="error"></p>
 				  </div>
 				  <div class="col-2">
