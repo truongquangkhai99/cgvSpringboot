@@ -98,7 +98,7 @@
          <img src="<c:url value="/user/images/${item.image}"/>" />
       </div>
       <!--text--------->
-      <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }">${item.filmName } </a>
+      <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }" style="font-size:130%">${item.filmName } </a>
       <!-- Button trigger modal -->
       <div style="margin-bottom: 15px" class="button--movie">
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${index1.index+1}"
@@ -123,7 +123,7 @@
 
 	<!--  Modak Booking -->
 	<div class="modal fade" id="exampleModa${item.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">${item.filmName}</h5>
