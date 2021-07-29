@@ -11,91 +11,66 @@ and open the template in the editor.
 <head>
  <title>Giới thiệu</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="<c:url value="/user/Event/table.css"/>"   rel="stylesheet" type="text/css"/>
-	  <link rel="stylesheet" href="<c:url value="/user/css/phim.css"/>" />
-	  <link rel="stylesheet" href="<c:url value="/user/css/lightslider.css"/>" />
-	  <script src="<c:url value="/user/js/JQuery3.3.1.js"/>" type="text/javascript"></script>
-	  <script src="<c:url value="/user/js/lightslider.js"/>" type="text/javascript"></script>
-	  <script src="<c:url value="/user/js/booking.js"/>" type="text/javascript"></script>
-	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-	    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-	  <link rel="shortcut icon" href="<c:url value="/user/images/fav icon.png"/>"/>
-	  <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
-	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-	    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-	    crossorigin="anonymous" referrerpolicy="no-referrer" />
-	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	    crossorigin="anonymous"></script>
-	  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-	    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-	    crossorigin="anonymous"></script>
-	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-	    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-	    crossorigin="anonymous"></script>
-    <style>
-.accordion {
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  
-  height: 40px;
-  margin-bottom: 20px;
-  border: none;
-  text-align: center;
-  outline: none;
-  font-size: 15px;
-  transition: 0.4s;
-}
-
-.active, .accordion:hover {
-  background-color: #d42304; 
-  color:white;
-}
-
-.panel {
-  margin: 0 auto;
-  width: 70%;
-  display: none;
-  background-color: white;
-  overflow: hidden;
-}
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="Event/table.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="./images/fav icon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/phim.css">
+	    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <%@ include file="/user/header/header.jsp"  %>
-    <div class="container" style="margin-top: 200px">
-     <div style="margin: 0 auto">
- 		<c:forEach var="item" items="${ listInfor}" varStatus="index">
-			
-			    <button style="margin-left: 100px" class="accordion">${item.title }</button>
-			    <div class="panel">
-			      <p>${item.description }</p>
-			    </div>
-			
-    </c:forEach>
-  </div>
-    </div>
-  
-<script>
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
-  });
-}
-</script>
-    
+    <div class="container ">
+        <div class="row">
+            <div class="col-4" style="height: 400px;margin-top: 140px;">
+                <ul class="nav flex-column nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist"
+                    style="margin-bottom: 100px;border: 1px solid #D42304;padding-top: 20px;padding-bottom: 20px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                            aria-controls="pills-home" aria-selected="true">${listInfor.get(0).title } <span class="pull-right hidden-xs showopacity fa fa-th-large" style="margin-left: 225px;"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-home2-tab" data-toggle="pill" href="#pills-home4" role="tab"
+                            aria-controls="pills-home2" aria-selected="false">${listInfor.get(1).title }<span class="pull-right hidden-xs showopacity fa fa-flag-checkered" style="margin-left: 175px;"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-home3-tab" data-toggle="pill" href="#pills-home3" role="tab"
+                            aria-controls="pills-home3" aria-selected="false">${listInfor.get(2).title } <span class="pull-right hidden-xs showopacity fa fa-unlock-alt" style="margin-left: 158px;"></span>
+                            </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-home4-tab" data-toggle="pill" href="#pills-home2" role="tab"
+                            aria-controls="pills-home4" aria-selected="false">${listInfor.get(3).title }<span class="pull-right hidden-xs showopacity fa fa-users" style="margin-left: 73px;"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-8" >
+                <div class="tab-content" id="pills-tabContent" style="margin-top: 140px;">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                        aria-labelledby="pills-home-tab" style=" text-align: justify;">
+                        <h4 style="color:brown;text-transform: uppercase;">${listInfor.get(0).title }</h4>
+                        ${listInfor.get(0).description }
+                    </div>
+                    <div class="tab-pane fade" id="pills-home2" role="tabpanel" aria-labelledby="pills-home2-tab" style=" text-align: justify;">
+                        <h4 style="color:brown;text-transform: uppercase;">${listInfor.get(1).title }</h4>
+                        ${listInfor.get(1).description }
+                    </div>
+                    <div class="tab-pane fade" id="pills-home3" role="tabpanel" aria-labelledby="pills-home3-tab" style=" text-align: justify;">
+                        <h4 style="color:brown;text-transform: uppercase;">${listInfor.get(2).title }</h4>
+                        ${listInfor.get(2).description }
+                    </div>
+                    <div class="tab-pane fade" id="pills-home4" role="tabpanel" aria-labelledby="pills-home4-tab" style=" text-align: justify;">
+                        <h4 style="color:brown;text-transform: uppercase;">${listInfor.get(3).title }</h4>
+                        ${listInfor.get(3).description }
+                    </div>
+                </div>
+            </div>
         
         
     
