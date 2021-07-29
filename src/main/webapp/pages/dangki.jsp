@@ -35,15 +35,34 @@
                             <input type="text" name="name" id="name" placeholder="Your Username" required="required"/>
                         </div>
                         <div class="form-group">
-                            <label for="email"><i class="zmdi zmdi-email"></i></label>
-                            <input type="email" name="email" id="email" placeholder="Your Email" required="required"/>
+                          
+                              <c:if test="${mess != null }"> 
+                                <label for="email"><i style="color: red" class="zmdi zmdi-email"></i></label>
+									 <input style="border-bottom-color: red" type="email" name="email" id="email" placeholder="Your Email" required="required"/>
+							  </c:if> 
+                           <c:if test="${mess == null }"> 
+                             <label for="email"><i  class="zmdi zmdi-email"></i></label>
+									 <input  type="email" name="email" id="email" placeholder="Your Email" required="required"/>
+							  </c:if> 
                         </div>
+                         <p style="color: red;font-size: 14px">${mess != null ? mess :null}</p>
                         <div class="form-group">
                           <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                          <input type="tel" name="phone" id="phone" pattern="[0-9]{3}[0-9]{4}[0-9]{3}"
+                          <input type="tel" name="phone" id="phone" pattern="[0]{1}[0-9]{9}"
                           placeholder="Your Phone" required="required"/>
                       </div>
-                        <div class="form-group">
+                      <c:if test="${mess1 != null }"> 
+									 <div class="form-group">
+                            <label for="pass"><i style="color: red" class="zmdi zmdi-lock"></i></label>
+                            <input style="border-bottom-color: red" type="password" name="pass" id="pass" placeholder="Password" required="required"/>
+	                        </div>
+	                        <div class="form-group">
+	                            <label for="re-pass"><i style="color: red"  class="zmdi zmdi-lock-outline"></i></label>
+	                            <input style="border-bottom-color: red" type="password" name="re_pass" id="re_pass"  placeholder="Repeat your password" required="required"/>
+	                        </div>
+							  </c:if> 
+                           <c:if test="${mess1 == null }"> 
+									  <div class="form-group">
                             <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                             <input type="password" name="pass" id="pass" placeholder="Password" required="required"/>
                         </div>
@@ -51,7 +70,9 @@
                             <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
                             <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" required="required"/>
                         </div>
-                         <p style="color: red">${mess != null ? mess :null}</p>
+							  </c:if> 
+                       
+                        <p style="color: red;font-size: 14px">${mess1 != null ? mess1 :null}</p>
                         <div class="form-group">
                             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" value="1" required/>
                             <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>

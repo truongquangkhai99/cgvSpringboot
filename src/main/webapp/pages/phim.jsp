@@ -100,7 +100,7 @@
       <!--text--------->
       <a href="<%= request.getContextPath() %>/detail/${item.id }/${item.id_cfilm }">${item.filmName } </a>
       <!-- Button trigger modal -->
-      <div class="button--movie">
+      <div style="margin-bottom: 15px" class="button--movie">
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${index1.index+1}"
           style="margin-right: 20px">
           Trailer
@@ -191,6 +191,20 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	
+      <div  class="modal-dialog modal-xl">
+      	
+        <div style="position: relative;" class="modal-content">
+	        <div style="position: absolute; top: -15px;right: -15px;z-index: 2000">
+				  <button type="button" id="myBtn" style="background-color: red;border-radius: 50px;color: white; height: 50px;width: 50px;border: 1px solid #ffff;">X</button>
+			</div>
+          <div  class="modal-body">
+            <img width="1100" alt="" src="https://metiz.vn/media/home_ads/180545725_3922816121127350_8925720424153118688_n.jpg?fbclid=IwAR1FUQ9Yps8xTLZauT1nLMIuWTfmgaUQ5XVlni02nf6nWYTVfmIJb1TORPo">
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
  
   <script>
@@ -204,6 +218,17 @@
       });
     });
   </script>
+  <script>
+$(document).ready(function(){
+  // Show the Modal on load
+  $("#myModal").modal("show");
+    
+  // Hide the Modal
+  $("#myBtn").click(function(){
+    $("#myModal").modal("hide");
+  });
+});
+</script>
 <script type="text/javascript">
 	$("#exampleModal1").on("hidden.bs.modal", function () {
 	    $("#exampleModal1 iframe").attr(

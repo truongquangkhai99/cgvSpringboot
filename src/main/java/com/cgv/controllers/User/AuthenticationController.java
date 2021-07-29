@@ -43,7 +43,7 @@ public class AuthenticationController {
 		user.setUsername(name);
 		user.setPhoneNumber(phone);
 		if(!password.equalsIgnoreCase(rePassword)) {
-			mv.addObject("mess","Password is not map with rePassword !!");	
+			mv.addObject("mess1","Password is not map with rePassword !!");	
 		}else {
 			boolean result = userService.register(user);
 		    if(result) {   	
