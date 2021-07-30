@@ -26,7 +26,7 @@
     <!--search------------->
    <div>
    
-   	<ul style="margin-left: 40px" class="menu">
+   	<ul class="menu" style="align-items: center;">
    	<%if(userInfo != null) {%>
       	<li><a style="font-size: 18px" href="#"><%=userInfo.getUsername()%></a></li>
    	<li><a style="font-size: 18px" href="<%= request.getContextPath() %>/user/logout">Đăng Xuất</a></li>
@@ -34,12 +34,17 @@
        
       <%} %>
    	</ul>
-    <form style="width: 300px" class="search" action="<%=request.getContextPath()%>/user/search" method="post">
-     <input style="width: 300px" type="text" name="keySearch" placeholder="Find Your Favourtie Movies" /> 
-      <!--search-icon----------->
-      <button style="border: none;background-color: #f6f5f0" type="submit" >  <i type="submit" name="signin" class="fas fa-search"></i></button>
-
-    </form>
+   	<ul class="menu" >
+	   	<li>
+	   	 <form style="width: 280px" class="search" action="<%=request.getContextPath()%>/user/search" method="post">
+	     <input style="width: 280px" type="text" name="keySearch" placeholder="Find Your Favourtie Movies" /> 
+	      <!--search-icon----------->
+	      <button style="border: none;background-color: #f6f5f0" type="submit" >  <i type="submit" name="signin" class="fas fa-search"></i></button>
+	
+	    </form>
+	   	</li>
+   	</ul>
+   
    </div>
    
 

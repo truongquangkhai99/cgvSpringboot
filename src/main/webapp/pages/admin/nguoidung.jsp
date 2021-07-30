@@ -99,7 +99,7 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label for="phone"
-                                                                class="col-form-label">${item.phoneNumber }</label>
+                                                                class="col-form-label">Số điện thoại</label>
                                                             <input type="text" class="form-control" id="phone" name="phone" value="${item.phoneNumber }">
                                                         </div>
                                                         <div class="mb-3">

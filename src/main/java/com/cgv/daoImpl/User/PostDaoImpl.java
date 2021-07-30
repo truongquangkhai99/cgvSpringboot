@@ -11,7 +11,7 @@ import com.cgv.dao.User.PostDao;
 import com.cgv.models.Post;
 @Repository
 public class PostDaoImpl implements PostDao{
-	public static final String GET_PROMOTION = "SELECT * FROM `post` WHERE id_cpost = 1";
+	public static final String GET_PROMOTION = "SELECT * FROM `post` WHERE id_cpost = 1 ORDER BY id DESC";
 	public static final String GET_INFOR = "SELECT * FROM `post` WHERE id_cpost = 2";
 	public static final String GET_DETAIL = "SELECT * FROM `post` WHERE id = ?";
 	@Autowired

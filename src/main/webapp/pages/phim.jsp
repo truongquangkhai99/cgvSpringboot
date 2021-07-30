@@ -200,7 +200,7 @@
 				  <button type="button" id="myBtn" style="background-color: red;border-radius: 50px;color: white; height: 50px;width: 50px;border: 1px solid #ffff;">X</button>
 			</div>
           <div  class="modal-body">
-            <img width="1100" alt="" src="https://metiz.vn/media/home_ads/180545725_3922816121127350_8925720424153118688_n.jpg?fbclid=IwAR1FUQ9Yps8xTLZauT1nLMIuWTfmgaUQ5XVlni02nf6nWYTVfmIJb1TORPo">
+            <img width="1100" alt="" src="https://scontent.fdad1-1.fna.fbcdn.net/v/t1.15752-9/217589381_871156610469250_6041536226227345776_n.png?_nc_cat=100&ccb=1-3&_nc_sid=ae9488&_nc_ohc=VvtAcz0bhX0AX-HsK2U&tn=yUSqQsKKbEHSVih-&_nc_ht=scontent.fdad1-1.fna&oh=54e8d8e7544deb08ec6ae889697dff66&oe=61272AF4">
           </div>
         </div>
       </div>
