@@ -75,7 +75,7 @@ public class UserAdminController {
 		}else {
 			boolean result = adminUserServiceimpl.insert(user);
 		    if(result) {   	
-		    	mv.addObject("mess","Register successfully");	
+		    	mv.addObject("mess1","Add successfully");	
 		    }else {
 		    	mv.addObject("mess","Email is exited");	
 		    }
@@ -102,10 +102,10 @@ public class UserAdminController {
 		user.setId(Integer.parseInt(id));
 		boolean result = adminUserServiceimpl.edit(user);
 		if(result) {
-			System.out.println("Thành công");
+			mv.addObject("mess1","Update successfully");	
 		}
 		else {
-			System.err.println("Thất bại");
+			mv.addObject("mess","Email is exited");	
 		}
 		return mv;
 	}

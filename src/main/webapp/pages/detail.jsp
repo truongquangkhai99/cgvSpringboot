@@ -144,9 +144,7 @@ and open the template in the editor.
         <div id="responeAjax">
         <div class="headings d-flex justify-content-between align-items-center mb-3">
                 <h5> Comments ${ listRating.size()}</h5>
-                <div class="buttons"> <span class="badge bg-white d-flex flex-row align-items-center"> <span class="text-primary">Comments "ON"</span>
-                        <div class="form-check form-switch"> <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> </div>
-                    </span> </div>
+             
             </div>
            
              <c:forEach var="item" items="${ listRating	}" varStatus="index">
@@ -167,8 +165,8 @@ and open the template in the editor.
                <form class="form-inline">
 					<div class="row">
 					 <div class="form-group  col-10">
-				    <label for="inputPassword2" class="sr-only">Password</label>
-				    <input type="text" class="form-control" name="comment" id="comment" placeholder="">
+		
+				    <input type="text" class="form-control" name="comment" id="comment" placeholder="commnet">
 				    <p style="color: red;margin-top: 10px" id="error"></p>
 				  </div>
 				  <div class="col-2">
