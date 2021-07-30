@@ -185,6 +185,7 @@ public class BookingController {
 				boolean resultBooking = false;
 				booking.setShowtimeId(Integer.parseInt(idShowtime));
 				booking.setUserId(user.getId());
+				bookingR.setAmount(GIA_VE * arrSeat.size());
 				for (int i = 0; i < arrSeat.size(); i++) {
 					Seat seata = seatImpl.getNameSeat(arrSeat.get(i));
 					System.out.println(seata);
