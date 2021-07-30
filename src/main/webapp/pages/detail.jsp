@@ -39,7 +39,7 @@ and open the template in the editor.
     <body>
        <%@ include file="/user/header/header.jsp"  %>
       
-        <p class="head3">${detailfilm.filmName }</p>
+        <p class="head3" style="font-size:40px">${detailfilm.filmName }</p>
         <div class="row container" style="border: 1px solid #d42304;margin: 0 auto;padding: 10px 0">
         <div class="col-4">
          <img class="image3" src="<c:url value="/user/images/${detailfilm.image }"/>" alt=""/>
