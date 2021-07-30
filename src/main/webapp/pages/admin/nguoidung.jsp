@@ -19,14 +19,30 @@
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
                         <li class="breadcrumb-item active">Người dùng</li>
                     </ol>
-
+                       <% String mes = (String)request.getParameter("mess"); %>
+                          <%if(mes == null){  %>
+                          <%}else{ %>
+                         <div class="alert alert-danger" role="alert">
+					<%= mes %>
+					</div>
+                          <%} %>
+                          <% String mes1 = (String)request.getParameter("mess1"); %>
+                          <%if(mes1 == null){  %>
+                          <%}else{ %>
+                         <div class="alert alert-success" role="alert">
+					<%= mes1 %>
+					</div>
+                          <%} %>
+					
                     <div class="card mb-4">
                         <div class="card-header">
+                        
 							
                             <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                 data-bs-target="#exampleModalAdd">
                                 Thêm mới  
                             </button>
+                         
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple">
